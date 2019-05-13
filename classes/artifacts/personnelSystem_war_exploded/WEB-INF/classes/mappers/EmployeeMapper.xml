@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.personnelSystem.mapper.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.personnelSystem.entity.Employee">
+    <id column="employee_id" jdbcType="INTEGER" property="id" />
+    <result column="employee_nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="employee_mgr" jdbcType="INTEGER" property="mgr" />
+    <result column="employee_sex" jdbcType="INTEGER" property="sex" />
+    <result column="employee_salary" jdbcType="INTEGER" property="salary" />
+    <result column="employee_mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="employee_email" jdbcType="VARCHAR" property="email" />
+    <result column="employee_hireDate" jdbcType="TIMESTAMP" property="hiredate" />
+    <result column="employee_terminationDate" jdbcType="TIMESTAMP" property="terminationdate" />
+    <result column="employee_createdById" jdbcType="INTEGER" property="createdbyid" />
+    <result column="employee_createdTime" jdbcType="TIMESTAMP" property="createdtime" />
+    <result column="employee_modifyById" jdbcType="INTEGER" property="modifybyid" />
+    <result column="employee_modifyDateTime" jdbcType="TIMESTAMP" property="modifydatetime" />
+    <result column="employee_version" jdbcType="BIT" property="version" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    employee.id as employee_id, employee.nickname as employee_nickname, employee.mgr as employee_mgr, 
+    employee.sex as employee_sex, employee.salary as employee_salary, employee.mobile as employee_mobile, 
+    employee.email as employee_email, employee.hireDate as employee_hireDate, employee.terminationDate as employee_terminationDate, 
+    employee.createdById as employee_createdById, employee.createdTime as employee_createdTime, 
+    employee.modifyById as employee_modifyById, employee.modifyDateTime as employee_modifyDateTime, 
+    employee.version as employee_version
+  </sql>
+  <select id="selectByExample" parameterType="com.personnelSystem.entity.EmployeeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from employee employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee employee
+    where employee.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.personnelSystem.entity.EmployeeExample">
+    delete from employee employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.personnelSystem.entity.Employee">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into employee (nickname, mgr, sex, 
+      salary, mobile, email, 
+      hireDate, terminationDate, createdById, 
+      createdTime, modifyById, modifyDateTime, 
+      version)
+    values (#{nickname,jdbcType=VARCHAR}, #{mgr,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, 
+      #{salary,jdbcType=INTEGER}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{hiredate,jdbcType=TIMESTAMP}, #{terminationdate,jdbcType=TIMESTAMP}, #{createdbyid,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=TIMESTAMP}, #{modifybyid,jdbcType=INTEGER}, #{modifydatetime,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.personnelSystem.entity.Employee">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="mgr != null">
+        mgr,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="salary != null">
+        salary,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="hiredate != null">
+        hireDate,
+      </if>
+      <if test="terminationdate != null">
+        terminationDate,
+      </if>
+      <if test="createdbyid != null">
+        createdById,
+      </if>
+      <if test="createdtime != null">
+        createdTime,
+      </if>
+      <if test="modifybyid != null">
+        modifyById,
+      </if>
+      <if test="modifydatetime != null">
+        modifyDateTime,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="mgr != null">
+        #{mgr,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="salary != null">
+        #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="hiredate != null">
+        #{hiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminationdate != null">
+        #{terminationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdbyid != null">
+        #{createdbyid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null">
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifybyid != null">
+        #{modifybyid,jdbcType=INTEGER},
+      </if>
+      <if test="modifydatetime != null">
+        #{modifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.personnelSystem.entity.EmployeeExample" resultType="java.lang.Long">
+    select count(*) from employee employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update employee employee
+    <set>
+      <if test="record.id != null">
+        employee.id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.nickname != null">
+        employee.nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mgr != null">
+        employee.mgr = #{record.mgr,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null">
+        employee.sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.salary != null">
+        employee.salary = #{record.salary,jdbcType=INTEGER},
+      </if>
+      <if test="record.mobile != null">
+        employee.mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        employee.email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hiredate != null">
+        employee.hireDate = #{record.hiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.terminationdate != null">
+        employee.terminationDate = #{record.terminationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdbyid != null">
+        employee.createdById = #{record.createdbyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null">
+        employee.createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifybyid != null">
+        employee.modifyById = #{record.modifybyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifydatetime != null">
+        employee.modifyDateTime = #{record.modifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.version != null">
+        employee.version = #{record.version,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update employee employee
+    set employee.id = #{record.id,jdbcType=INTEGER},
+      employee.nickname = #{record.nickname,jdbcType=VARCHAR},
+      employee.mgr = #{record.mgr,jdbcType=INTEGER},
+      employee.sex = #{record.sex,jdbcType=INTEGER},
+      employee.salary = #{record.salary,jdbcType=INTEGER},
+      employee.mobile = #{record.mobile,jdbcType=VARCHAR},
+      employee.email = #{record.email,jdbcType=VARCHAR},
+      employee.hireDate = #{record.hiredate,jdbcType=TIMESTAMP},
+      employee.terminationDate = #{record.terminationdate,jdbcType=TIMESTAMP},
+      employee.createdById = #{record.createdbyid,jdbcType=INTEGER},
+      employee.createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      employee.modifyById = #{record.modifybyid,jdbcType=INTEGER},
+      employee.modifyDateTime = #{record.modifydatetime,jdbcType=TIMESTAMP},
+      employee.version = #{record.version,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.personnelSystem.entity.Employee">
+    update employee
+    <set>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="mgr != null">
+        mgr = #{mgr,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="salary != null">
+        salary = #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="hiredate != null">
+        hireDate = #{hiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminationdate != null">
+        terminationDate = #{terminationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdbyid != null">
+        createdById = #{createdbyid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null">
+        createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifybyid != null">
+        modifyById = #{modifybyid,jdbcType=INTEGER},
+      </if>
+      <if test="modifydatetime != null">
+        modifyDateTime = #{modifydatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.personnelSystem.entity.Employee">
+    update employee
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      mgr = #{mgr,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      salary = #{salary,jdbcType=INTEGER},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      hireDate = #{hiredate,jdbcType=TIMESTAMP},
+      terminationDate = #{terminationdate,jdbcType=TIMESTAMP},
+      createdById = #{createdbyid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      modifyById = #{modifybyid,jdbcType=INTEGER},
+      modifyDateTime = #{modifydatetime,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+    <sql id="listEmployee_Where_Clause">
+		<trim prefix="where" prefixOverrides="AND">
+		employee.version = 0
+		    <if test="id != null and id != ''">    	
+	    		and employee.id=#{id,jdbcType=INTEGER}
+	    	</if>
+			<if test="nickname != null and nickname != ''">
+				and lower(IFNULL(employee.nickname,'')) LIKE CONCAT(CONCAT('%',
+				TRIM(lower(#{nickname, jdbcType=VARCHAR}))), '%')
+			</if>
+			<if test="email != null and email != ''">
+				and lower(IFNULL(employee.email,'')) LIKE CONCAT(CONCAT('%',
+				TRIM(lower(#{email, jdbcType=VARCHAR}))), '%')
+			</if>
+			<if test="mobile != null and mobile != ''">
+				and lower(IFNULL(employee.mobile,'')) LIKE CONCAT(CONCAT('%',
+				TRIM(lower(#{mobile, jdbcType=VARCHAR}))), '%')
+			</if>
+		</trim>
+	</sql>
+    <select id="countEmployee" parameterType="com.personnelSystem.dto.criteria.SearchEmployeeCriteria" resultType="int">
+     	select 
+	        count(1)
+		FROM
+		  	employee
+		<if test="_parameter != null">
+            <include refid="listEmployee_Where_Clause" />
+        </if>
+    </select>
+    <select id="listEmployee" parameterType="com.personnelSystem.dto.criteria.SearchEmployeeCriteria" resultMap="BaseResultMap">
+		select 
+		  <include refid="Base_Column_List" />
+		FROM
+		   employee
+        <if test="_parameter != null">
+            <include refid="listEmployee_Where_Clause" />
+        </if>
+        ORDER BY employee.createdTime DESC
+        <if test="pagesize != 0">
+            LIMIT #{offset}, #{pagesize}
+        </if>
+    </select>
+</mapper>

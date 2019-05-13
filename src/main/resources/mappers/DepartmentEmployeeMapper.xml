@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.personnelSystem.mapper.DepartmentEmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.personnelSystem.entity.DepartmentEmployee">
+    <id column="departmentEmployee_departmentId" jdbcType="INTEGER" property="departmentid" />
+    <id column="departmentEmployee_emlopyeeId" jdbcType="INTEGER" property="emlopyeeid" />
+    <result column="departmentEmployee_createdById" jdbcType="INTEGER" property="createdbyid" />
+    <result column="departmentEmployee_createdTime" jdbcType="TIMESTAMP" property="createdtime" />
+    <result column="departmentEmployee_modifyById" jdbcType="INTEGER" property="modifybyid" />
+    <result column="departmentEmployee_modifyDateTime" jdbcType="TIMESTAMP" property="modifydatetime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    departmentEmployee.departmentId as departmentEmployee_departmentId, departmentEmployee.emlopyeeId as departmentEmployee_emlopyeeId, 
+    departmentEmployee.createdById as departmentEmployee_createdById, departmentEmployee.createdTime as departmentEmployee_createdTime, 
+    departmentEmployee.modifyById as departmentEmployee_modifyById, departmentEmployee.modifyDateTime as departmentEmployee_modifyDateTime
+  </sql>
+  <select id="selectByExample" parameterType="com.personnelSystem.entity.DepartmentEmployeeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from department_employee departmentEmployee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.personnelSystem.entity.DepartmentEmployeeKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from department_employee departmentEmployee
+    where departmentEmployee.departmentId = #{departmentid,jdbcType=INTEGER}
+      and departmentEmployee.emlopyeeId = #{emlopyeeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.personnelSystem.entity.DepartmentEmployeeKey">
+    delete from department_employee
+    where departmentId = #{departmentid,jdbcType=INTEGER}
+      and emlopyeeId = #{emlopyeeid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.personnelSystem.entity.DepartmentEmployeeExample">
+    delete from department_employee departmentEmployee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.personnelSystem.entity.DepartmentEmployee">
+    insert into department_employee (departmentId, emlopyeeId, createdById, 
+      createdTime, modifyById, modifyDateTime
+      )
+    values (#{departmentid,jdbcType=INTEGER}, #{emlopyeeid,jdbcType=INTEGER}, #{createdbyid,jdbcType=INTEGER}, 
+      #{createdtime,jdbcType=TIMESTAMP}, #{modifybyid,jdbcType=INTEGER}, #{modifydatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.personnelSystem.entity.DepartmentEmployee">
+    insert into department_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="departmentid != null">
+        departmentId,
+      </if>
+      <if test="emlopyeeid != null">
+        emlopyeeId,
+      </if>
+      <if test="createdbyid != null">
+        createdById,
+      </if>
+      <if test="createdtime != null">
+        createdTime,
+      </if>
+      <if test="modifybyid != null">
+        modifyById,
+      </if>
+      <if test="modifydatetime != null">
+        modifyDateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="departmentid != null">
+        #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="emlopyeeid != null">
+        #{emlopyeeid,jdbcType=INTEGER},
+      </if>
+      <if test="createdbyid != null">
+        #{createdbyid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null">
+        #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifybyid != null">
+        #{modifybyid,jdbcType=INTEGER},
+      </if>
+      <if test="modifydatetime != null">
+        #{modifydatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.personnelSystem.entity.DepartmentEmployeeExample" resultType="java.lang.Long">
+    select count(*) from department_employee departmentEmployee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update department_employee departmentEmployee
+    <set>
+      <if test="record.departmentid != null">
+        departmentEmployee.departmentId = #{record.departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.emlopyeeid != null">
+        departmentEmployee.emlopyeeId = #{record.emlopyeeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdbyid != null">
+        departmentEmployee.createdById = #{record.createdbyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdtime != null">
+        departmentEmployee.createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifybyid != null">
+        departmentEmployee.modifyById = #{record.modifybyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.modifydatetime != null">
+        departmentEmployee.modifyDateTime = #{record.modifydatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update department_employee departmentEmployee
+    set departmentEmployee.departmentId = #{record.departmentid,jdbcType=INTEGER},
+      departmentEmployee.emlopyeeId = #{record.emlopyeeid,jdbcType=INTEGER},
+      departmentEmployee.createdById = #{record.createdbyid,jdbcType=INTEGER},
+      departmentEmployee.createdTime = #{record.createdtime,jdbcType=TIMESTAMP},
+      departmentEmployee.modifyById = #{record.modifybyid,jdbcType=INTEGER},
+      departmentEmployee.modifyDateTime = #{record.modifydatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.personnelSystem.entity.DepartmentEmployee">
+    update department_employee
+    <set>
+      <if test="createdbyid != null">
+        createdById = #{createdbyid,jdbcType=INTEGER},
+      </if>
+      <if test="createdtime != null">
+        createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifybyid != null">
+        modifyById = #{modifybyid,jdbcType=INTEGER},
+      </if>
+      <if test="modifydatetime != null">
+        modifyDateTime = #{modifydatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where departmentId = #{departmentid,jdbcType=INTEGER}
+      and emlopyeeId = #{emlopyeeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.personnelSystem.entity.DepartmentEmployee">
+    update department_employee
+    set createdById = #{createdbyid,jdbcType=INTEGER},
+      createdTime = #{createdtime,jdbcType=TIMESTAMP},
+      modifyById = #{modifybyid,jdbcType=INTEGER},
+      modifyDateTime = #{modifydatetime,jdbcType=TIMESTAMP}
+    where departmentId = #{departmentid,jdbcType=INTEGER}
+      and emlopyeeId = #{emlopyeeid,jdbcType=INTEGER}
+  </update>
+  
+   <select id="getDepartmentInfo" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />
+	from department_employee departmentEmployee
+	where departmentEmployee.emlopyeeId = #{emlopyeeid,jdbcType=BIGINT}
+  </select>
+  
+  	<select id="EmployeeListByDepartmentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+	    <include refid="Base_Column_List" />
+		from department_employee departmentEmployee
+		where departmentEmployee.departmentId = #{departmentid,jdbcType=BIGINT}
+		
+	</select>
+</mapper>

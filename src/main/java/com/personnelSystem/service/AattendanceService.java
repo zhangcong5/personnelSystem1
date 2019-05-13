@@ -1,0 +1,39 @@
+package com.personnelSystem.service;
+
+import java.util.List;
+
+import com.personnelSystem.dto.admin.AattendanceDto;
+import com.personnelSystem.dto.criteria.SearchAattendanceCriteria;
+import com.personnelSystem.util.ResultDataDto;
+
+public interface AattendanceService {
+	
+	/**
+	 * 根据条件查询考勤数据对象列表
+	 * @param Criteria
+	 * @return
+	 */
+	public List<AattendanceDto> listAattendanceInfoDto(SearchAattendanceCriteria Criteria);
+	
+	/**
+	 * 增加考勤数据信息
+	 * @param aattendance
+	 * @throws Exception 
+	 */
+	public ResultDataDto insert(AattendanceDto aattendance) throws Exception;
+	
+	/**
+	 * 编辑考勤数据信息
+	 * @param aattendance
+	 * @return
+	 * @throws Exception 
+	 */
+	public ResultDataDto update(AattendanceDto aattendance) throws Exception;
+	
+	/**
+	 * 考勤数据数量
+	 * @param Criteria
+	 * @return
+	 */
+	public int count(SearchAattendanceCriteria Criteria);
+}
