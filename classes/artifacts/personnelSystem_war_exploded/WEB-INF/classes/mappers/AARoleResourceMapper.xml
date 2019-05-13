@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.personnelSystem.mapper.AARoleResourceMapper">
+  <resultMap id="BaseResultMap" type="com.personnelSystem.entity.AARoleResource">
+    <id column="aaRoleResource_ROLE_ID" jdbcType="INTEGER" property="roleId" />
+    <id column="aaRoleResource_RESOURCE_ID" jdbcType="INTEGER" property="resourceId" />
+    <result column="aaRoleResource_CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="aaRoleResource_CREATED_BY" jdbcType="INTEGER" property="createdBy" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aaRoleResource.ROLE_ID as aaRoleResource_ROLE_ID, aaRoleResource.RESOURCE_ID as aaRoleResource_RESOURCE_ID, 
+    aaRoleResource.CREATED_TIME as aaRoleResource_CREATED_TIME, aaRoleResource.CREATED_BY as aaRoleResource_CREATED_BY
+  </sql>
+  <select id="selectByExample" parameterType="com.personnelSystem.entity.AARoleResourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from aa_role_resource aaRoleResource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.personnelSystem.entity.AARoleResourceKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from aa_role_resource aaRoleResource
+    where aaRoleResource.ROLE_ID = #{roleId,jdbcType=INTEGER}
+      and aaRoleResource.RESOURCE_ID = #{resourceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.personnelSystem.entity.AARoleResourceKey">
+    delete from aa_role_resource
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+      and RESOURCE_ID = #{resourceId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.personnelSystem.entity.AARoleResourceExample">
+    delete from aa_role_resource aaRoleResource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.personnelSystem.entity.AARoleResource">
+    insert into aa_role_resource (ROLE_ID, RESOURCE_ID, CREATED_TIME, 
+      CREATED_BY)
+    values (#{roleId,jdbcType=INTEGER}, #{resourceId,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{createdBy,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.personnelSystem.entity.AARoleResource">
+    insert into aa_role_resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="resourceId != null">
+        RESOURCE_ID,
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME,
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceId != null">
+        #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.personnelSystem.entity.AARoleResourceExample" resultType="java.lang.Long">
+    select count(*) from aa_role_resource aaRoleResource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update aa_role_resource aaRoleResource
+    <set>
+      <if test="record.roleId != null">
+        aaRoleResource.ROLE_ID = #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceId != null">
+        aaRoleResource.RESOURCE_ID = #{record.resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdTime != null">
+        aaRoleResource.CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdBy != null">
+        aaRoleResource.CREATED_BY = #{record.createdBy,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update aa_role_resource aaRoleResource
+    set aaRoleResource.ROLE_ID = #{record.roleId,jdbcType=INTEGER},
+      aaRoleResource.RESOURCE_ID = #{record.resourceId,jdbcType=INTEGER},
+      aaRoleResource.CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      aaRoleResource.CREATED_BY = #{record.createdBy,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.personnelSystem.entity.AARoleResource">
+    update aa_role_resource
+    <set>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdBy != null">
+        CREATED_BY = #{createdBy,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+      and RESOURCE_ID = #{resourceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.personnelSystem.entity.AARoleResource">
+    update aa_role_resource
+    set CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      CREATED_BY = #{createdBy,jdbcType=INTEGER}
+    where ROLE_ID = #{roleId,jdbcType=INTEGER}
+      and RESOURCE_ID = #{resourceId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.personnelSystem.mapper.AAResourceMapper">
+  <resultMap id="BaseResultMap" type="com.personnelSystem.entity.AAResource">
+    <id column="aaResource_RESOURCE_ID" jdbcType="INTEGER" property="resourceId" />
+    <result column="aaResource_RESOURCE_CODE" jdbcType="VARCHAR" property="resourceCode" />
+    <result column="aaResource_RESOURCE_NAME" jdbcType="VARCHAR" property="resourceName" />
+    <result column="aaResource_RESOURCE_TYPE_CD" jdbcType="VARCHAR" property="resourceTypeCd" />
+    <result column="aaResource_RESOURCE_VALUE" jdbcType="VARCHAR" property="resourceValue" />
+    <result column="aaResource_PARENT_RESOURCE_ID" jdbcType="INTEGER" property="parentResourceId" />
+    <result column="aaResource_DELETED" jdbcType="INTEGER" property="deleted" />
+    <result column="aaResource_CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="aaResource_UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="aaResource_CREATED_BYID" jdbcType="INTEGER" property="createdByid" />
+    <result column="aaResource_UPDATED_BYID" jdbcType="INTEGER" property="updatedByid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    aaResource.RESOURCE_ID as aaResource_RESOURCE_ID, aaResource.RESOURCE_CODE as aaResource_RESOURCE_CODE, 
+    aaResource.RESOURCE_NAME as aaResource_RESOURCE_NAME, aaResource.RESOURCE_TYPE_CD as aaResource_RESOURCE_TYPE_CD, 
+    aaResource.RESOURCE_VALUE as aaResource_RESOURCE_VALUE, aaResource.PARENT_RESOURCE_ID as aaResource_PARENT_RESOURCE_ID, 
+    aaResource.DELETED as aaResource_DELETED, aaResource.CREATED_TIME as aaResource_CREATED_TIME, 
+    aaResource.UPDATED_TIME as aaResource_UPDATED_TIME, aaResource.CREATED_BYID as aaResource_CREATED_BYID, 
+    aaResource.UPDATED_BYID as aaResource_UPDATED_BYID
+  </sql>
+  <select id="selectByExample" parameterType="com.personnelSystem.entity.AAResourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from aa_resource aaResource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from aa_resource aaResource
+    where aaResource.RESOURCE_ID = #{resourceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from aa_resource
+    where RESOURCE_ID = #{resourceId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.personnelSystem.entity.AAResourceExample">
+    delete from aa_resource aaResource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.personnelSystem.entity.AAResource">
+    insert into aa_resource (RESOURCE_ID, RESOURCE_CODE, RESOURCE_NAME, 
+      RESOURCE_TYPE_CD, RESOURCE_VALUE, PARENT_RESOURCE_ID, 
+      DELETED, CREATED_TIME, UPDATED_TIME, 
+      CREATED_BYID, UPDATED_BYID)
+    values (#{resourceId,jdbcType=INTEGER}, #{resourceCode,jdbcType=VARCHAR}, #{resourceName,jdbcType=VARCHAR}, 
+      #{resourceTypeCd,jdbcType=VARCHAR}, #{resourceValue,jdbcType=VARCHAR}, #{parentResourceId,jdbcType=INTEGER}, 
+      #{deleted,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}, 
+      #{createdByid,jdbcType=INTEGER}, #{updatedByid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.personnelSystem.entity.AAResource">
+    insert into aa_resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resourceId != null">
+        RESOURCE_ID,
+      </if>
+      <if test="resourceCode != null">
+        RESOURCE_CODE,
+      </if>
+      <if test="resourceName != null">
+        RESOURCE_NAME,
+      </if>
+      <if test="resourceTypeCd != null">
+        RESOURCE_TYPE_CD,
+      </if>
+      <if test="resourceValue != null">
+        RESOURCE_VALUE,
+      </if>
+      <if test="parentResourceId != null">
+        PARENT_RESOURCE_ID,
+      </if>
+      <if test="deleted != null">
+        DELETED,
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME,
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME,
+      </if>
+      <if test="createdByid != null">
+        CREATED_BYID,
+      </if>
+      <if test="updatedByid != null">
+        UPDATED_BYID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resourceId != null">
+        #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceCode != null">
+        #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceName != null">
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceTypeCd != null">
+        #{resourceTypeCd,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceValue != null">
+        #{resourceValue,jdbcType=VARCHAR},
+      </if>
+      <if test="parentResourceId != null">
+        #{parentResourceId,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdByid != null">
+        #{createdByid,jdbcType=INTEGER},
+      </if>
+      <if test="updatedByid != null">
+        #{updatedByid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.personnelSystem.entity.AAResourceExample" resultType="java.lang.Long">
+    select count(*) from aa_resource aaResource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update aa_resource aaResource
+    <set>
+      <if test="record.resourceId != null">
+        aaResource.RESOURCE_ID = #{record.resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceCode != null">
+        aaResource.RESOURCE_CODE = #{record.resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceName != null">
+        aaResource.RESOURCE_NAME = #{record.resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceTypeCd != null">
+        aaResource.RESOURCE_TYPE_CD = #{record.resourceTypeCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceValue != null">
+        aaResource.RESOURCE_VALUE = #{record.resourceValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentResourceId != null">
+        aaResource.PARENT_RESOURCE_ID = #{record.parentResourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleted != null">
+        aaResource.DELETED = #{record.deleted,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdTime != null">
+        aaResource.CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedTime != null">
+        aaResource.UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdByid != null">
+        aaResource.CREATED_BYID = #{record.createdByid,jdbcType=INTEGER},
+      </if>
+      <if test="record.updatedByid != null">
+        aaResource.UPDATED_BYID = #{record.updatedByid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update aa_resource aaResource
+    set aaResource.RESOURCE_ID = #{record.resourceId,jdbcType=INTEGER},
+      aaResource.RESOURCE_CODE = #{record.resourceCode,jdbcType=VARCHAR},
+      aaResource.RESOURCE_NAME = #{record.resourceName,jdbcType=VARCHAR},
+      aaResource.RESOURCE_TYPE_CD = #{record.resourceTypeCd,jdbcType=VARCHAR},
+      aaResource.RESOURCE_VALUE = #{record.resourceValue,jdbcType=VARCHAR},
+      aaResource.PARENT_RESOURCE_ID = #{record.parentResourceId,jdbcType=INTEGER},
+      aaResource.DELETED = #{record.deleted,jdbcType=INTEGER},
+      aaResource.CREATED_TIME = #{record.createdTime,jdbcType=TIMESTAMP},
+      aaResource.UPDATED_TIME = #{record.updatedTime,jdbcType=TIMESTAMP},
+      aaResource.CREATED_BYID = #{record.createdByid,jdbcType=INTEGER},
+      aaResource.UPDATED_BYID = #{record.updatedByid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.personnelSystem.entity.AAResource">
+    update aa_resource
+    <set>
+      <if test="resourceCode != null">
+        RESOURCE_CODE = #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceName != null">
+        RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceTypeCd != null">
+        RESOURCE_TYPE_CD = #{resourceTypeCd,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceValue != null">
+        RESOURCE_VALUE = #{resourceValue,jdbcType=VARCHAR},
+      </if>
+      <if test="parentResourceId != null">
+        PARENT_RESOURCE_ID = #{parentResourceId,jdbcType=INTEGER},
+      </if>
+      <if test="deleted != null">
+        DELETED = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdByid != null">
+        CREATED_BYID = #{createdByid,jdbcType=INTEGER},
+      </if>
+      <if test="updatedByid != null">
+        UPDATED_BYID = #{updatedByid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where RESOURCE_ID = #{resourceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.personnelSystem.entity.AAResource">
+    update aa_resource
+    set RESOURCE_CODE = #{resourceCode,jdbcType=VARCHAR},
+      RESOURCE_NAME = #{resourceName,jdbcType=VARCHAR},
+      RESOURCE_TYPE_CD = #{resourceTypeCd,jdbcType=VARCHAR},
+      RESOURCE_VALUE = #{resourceValue,jdbcType=VARCHAR},
+      PARENT_RESOURCE_ID = #{parentResourceId,jdbcType=INTEGER},
+      DELETED = #{deleted,jdbcType=INTEGER},
+      CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      CREATED_BYID = #{createdByid,jdbcType=INTEGER},
+      UPDATED_BYID = #{updatedByid,jdbcType=INTEGER}
+    where RESOURCE_ID = #{resourceId,jdbcType=INTEGER}
+  </update>
+</mapper>
