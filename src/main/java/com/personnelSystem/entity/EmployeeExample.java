@@ -974,6 +974,136 @@ public class EmployeeExample {
 			addCriterion("employee.version not between", value1, value2, "version");
 			return (Criteria) this;
 		}
+
+		public Criteria andPasswordIsNull() {
+			addCriterion("employee.password is null");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordIsNotNull() {
+			addCriterion("employee.password is not null");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordEqualTo(String value) {
+			addCriterion("employee.password =", value, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordNotEqualTo(String value) {
+			addCriterion("employee.password <>", value, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordGreaterThan(String value) {
+			addCriterion("employee.password >", value, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordGreaterThanOrEqualTo(String value) {
+			addCriterion("employee.password >=", value, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordLessThan(String value) {
+			addCriterion("employee.password <", value, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordLessThanOrEqualTo(String value) {
+			addCriterion("employee.password <=", value, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordLike(String value) {
+			addCriterion("employee.password like", value, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordNotLike(String value) {
+			addCriterion("employee.password not like", value, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordIn(List<String> values) {
+			addCriterion("employee.password in", values, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordNotIn(List<String> values) {
+			addCriterion("employee.password not in", values, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordBetween(String value1, String value2) {
+			addCriterion("employee.password between", value1, value2, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andPasswordNotBetween(String value1, String value2) {
+			addCriterion("employee.password not between", value1, value2, "password");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminIsNull() {
+			addCriterion("employee.isAdmin is null");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminIsNotNull() {
+			addCriterion("employee.isAdmin is not null");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminEqualTo(Integer value) {
+			addCriterion("employee.isAdmin =", value, "isadmin");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminNotEqualTo(Integer value) {
+			addCriterion("employee.isAdmin <>", value, "isadmin");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminGreaterThan(Integer value) {
+			addCriterion("employee.isAdmin >", value, "isadmin");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminGreaterThanOrEqualTo(Integer value) {
+			addCriterion("employee.isAdmin >=", value, "isadmin");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminLessThan(Integer value) {
+			addCriterion("employee.isAdmin <", value, "isadmin");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminLessThanOrEqualTo(Integer value) {
+			addCriterion("employee.isAdmin <=", value, "isadmin");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminIn(List<Integer> values) {
+			addCriterion("employee.isAdmin in", values, "isadmin");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminNotIn(List<Integer> values) {
+			addCriterion("employee.isAdmin not in", values, "isadmin");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminBetween(Integer value1, Integer value2) {
+			addCriterion("employee.isAdmin between", value1, value2, "isadmin");
+			return (Criteria) this;
+		}
+
+		public Criteria andIsadminNotBetween(Integer value1, Integer value2) {
+			addCriterion("employee.isAdmin not between", value1, value2, "isadmin");
+			return (Criteria) this;
+		}
 	}
 
 	public static class Criteria extends GeneratedCriteria {

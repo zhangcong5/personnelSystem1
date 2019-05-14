@@ -1,9 +1,13 @@
 package com.personnelSystem.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.MapKey;
+import org.apache.ibatis.annotations.Param;
+
 import com.personnelSystem.entity.AAResource;
 import com.personnelSystem.entity.AAResourceExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface AAResourceMapper {
     long countByExample(AAResourceExample example);
@@ -27,4 +31,17 @@ public interface AAResourceMapper {
     int updateByPrimaryKeySelective(AAResource record);
 
     int updateByPrimaryKey(AAResource record);
+    
+/*    int countResources(SearchResourceCriteria criteria);
+    
+    List<AAResource> listResources(SearchResourceCriteria criteria);
+
+	String selectParentName(Integer resourceId);
+	
+	@MapKey("resourceId")
+	Map<Long,AAResource> selectSubjectResource(SubjectResourceTypeDto subjectInfo);
+	
+	@MapKey("resourceId")
+	Map<Long,AAResource> selectRoleResource(SubjectResourceTypeDto subjectInfo);
+	*/
 }

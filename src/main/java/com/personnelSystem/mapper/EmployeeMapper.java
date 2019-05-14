@@ -30,7 +30,6 @@ public interface EmployeeMapper {
 	int updateByPrimaryKeySelective(Employee record);
 
 	int updateByPrimaryKey(Employee record);
-
     
  	/**
 	 * 查询员工列表
@@ -40,7 +39,7 @@ public interface EmployeeMapper {
 	List<Employee> listEmployee(SearchEmployeeCriteria criteria);
 	
 	/**
-	 *  根据条件查询员工的数量
+	 *  根据条件查询员工的数�?
 	 * @param criteria 查询条件
 	 * @return
 	 */

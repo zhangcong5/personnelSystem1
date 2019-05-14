@@ -14,7 +14,7 @@ public class ApiResponse<T> implements Serializable {
 	/**
 	 * 接口调用返回消息
 	 */
-	private String message;
+	private String msg;
 
 	/**
 	 * 接口调用返回代码
@@ -24,7 +24,12 @@ public class ApiResponse<T> implements Serializable {
 	/**
 	 * 接口调用返回内容
 	 */
-	private T body;
+	private T data;
+	
+	/**
+	 * 接口调用返回内容
+	 */
+	private int count;
 
 	public boolean isSuccess() {
 		return success;
@@ -34,13 +39,6 @@ public class ApiResponse<T> implements Serializable {
 		this.success = success;
 	}
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
 
 	public String getCode() {
 		return code;
@@ -50,17 +48,35 @@ public class ApiResponse<T> implements Serializable {
 		this.code = code;
 	}
 
-	public T getBody() {
-		return body;
+
+	public String getMsg() {
+		return msg;
 	}
 
-	public void setBody(T body) {
-		this.body = body;
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	@Override
 	public String toString() {
-		return "ApiResponse [success=" + success + ", message=" + message + ", code=" + code + ", body=" + body + "]";
+		return "ApiResponse [success=" + success + ", msg=" + msg + ", code=" + code + ", data=" + data + ", count="
+				+ count + "]";
 	}
 
 }

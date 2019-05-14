@@ -2,7 +2,6 @@ package com.personnelSystem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,7 +10,6 @@ import com.personnelSystem.dto.admin.DepartmentInfoDto;
 import com.personnelSystem.dto.admin.EmployeeInfoDto;
 import com.personnelSystem.dto.criteria.SearchDepartmentCriteria;
 import com.personnelSystem.facade.DepartmentFacade;
-import com.personnelSystem.util.ApiRequest;
 import com.personnelSystem.util.ApiResponse;
 import com.personnelSystem.util.PaginatedList;
 import com.personnelSystem.util.ResultDataDto;
@@ -44,7 +42,7 @@ public class DepartmentController {
 			apiResponse = WebCommUtil.getSuccessApiResponse(SystemConstant.Select_Success, departmentFacade.getEmployeeList(request));
 		} catch(Exception exp) {
 			apiResponse.setCode(SystemConstant.Code_GetDepartment_DbErr);
-			apiResponse.setMessage(String.format(SystemConstant.Msg_GetDepartment_DbErr, exp.getMessage()));	
+			apiResponse.setMsg(String.format(SystemConstant.Msg_GetDepartment_DbErr, exp.getMessage()));	
 		}
 		
 		return apiResponse;
@@ -62,7 +60,7 @@ public class DepartmentController {
 			apiResponse = WebCommUtil.getSuccessApiResponse(departmentFacade.getDetail(request.getId()));
 		} catch(Exception exp) {
 			apiResponse.setCode(SystemConstant.Code_GetDepartment_DbErr);
-			apiResponse.setMessage(String.format(SystemConstant.Msg_GetDepartment_DbErr, exp.getMessage()));
+			apiResponse.setMsg(String.format(SystemConstant.Msg_GetDepartment_DbErr, exp.getMessage()));
 		}
 		
 		return apiResponse;
@@ -80,14 +78,14 @@ public class DepartmentController {
 
 		try {
 			ResultDataDto resultDataDto = departmentFacade.insertDepartment(request);
-			response.setBody(resultDataDto);
+			response.setData(resultDataDto);
 			response.setCode(SystemConstant.Respose_Code_200);
 			response.setSuccess(true);
 			if (resultDataDto.getResultCode() != SystemConstant.Code_OK) {
 				response.setCode(resultDataDto.getResultCode());
 				response.setSuccess(false);
 			}
-			response.setMessage(resultDataDto.getResultMessage());	
+			response.setMsg(resultDataDto.getResultMessage());	
 		} catch(Exception exp) {
 			return WebCommUtil.getFailApiResponse(exp.getMessage());
 		}
@@ -106,14 +104,14 @@ public class DepartmentController {
 
 		try {
 			ResultDataDto resultDataDto = departmentFacade.updateDepartment(request);
-			response.setBody(resultDataDto);
+			response.setData(resultDataDto);
 			response.setCode(SystemConstant.Respose_Code_200);
 			response.setSuccess(true);
 			if (resultDataDto.getResultCode() != SystemConstant.Code_OK) {
 				response.setCode(resultDataDto.getResultCode());
 				response.setSuccess(false);
 			}
-			response.setMessage(resultDataDto.getResultMessage());	
+			response.setMsg(resultDataDto.getResultMessage());	
 		} catch(Exception exp) {
 			return WebCommUtil.getFailApiResponse(exp.getMessage());
 		}
@@ -132,14 +130,14 @@ public class DepartmentController {
 
 			try {
 				ResultDataDto resultDataDto = departmentFacade.deleteDepartment(request);
-				response.setBody(resultDataDto);
+				response.setData(resultDataDto);
 				response.setCode(SystemConstant.Respose_Code_200);
 				response.setSuccess(true);
 				if (resultDataDto.getResultCode() != SystemConstant.Code_OK) {
 					response.setCode(resultDataDto.getResultCode());
 					response.setSuccess(false);
 				}
-				response.setMessage(resultDataDto.getResultMessage());	
+				response.setMsg(resultDataDto.getResultMessage());	
 			} catch(Exception exp) {
 				return WebCommUtil.getFailApiResponse(exp.getMessage());
 			}

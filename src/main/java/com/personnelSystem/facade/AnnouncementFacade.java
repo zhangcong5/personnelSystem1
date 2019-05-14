@@ -1,11 +1,9 @@
 package com.personnelSystem.facade;
 
+import java.util.List;
+
 import com.personnelSystem.dto.admin.AnnouncementDto;
-import com.personnelSystem.dto.admin.DepartmentInfoDto;
-import com.personnelSystem.dto.admin.EmployeeInfoDto;
 import com.personnelSystem.dto.criteria.SearchAnnouncementCriteria;
-import com.personnelSystem.dto.criteria.SearchEmployeeCriteria;
-import com.personnelSystem.util.PaginatedList;
 import com.personnelSystem.util.ResultDataDto;
 
 public interface AnnouncementFacade {
@@ -15,7 +13,7 @@ public interface AnnouncementFacade {
 	 * @param Criteria
 	 * @return
 	 */
-	public PaginatedList<AnnouncementDto> getAnnouncementList(SearchAnnouncementCriteria Criteria);
+	public List<AnnouncementDto> getAnnouncementList(SearchAnnouncementCriteria Criteria);
 	
 	/**
 	 * 增加公告数据信息

@@ -1,5 +1,7 @@
 package com.personnelSystem.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,25 +11,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.personnelSystem.dto.admin.AnnouncementDto;
 import com.personnelSystem.dto.criteria.SearchAnnouncementCriteria;
 import com.personnelSystem.facade.AnnouncementFacade;
-import com.personnelSystem.util.ApiRequest;
+import com.personnelSystem.service.AnnouncementService;
 import com.personnelSystem.util.ApiResponse;
 import com.personnelSystem.util.PaginatedList;
 import com.personnelSystem.util.ResultDataDto;
 import com.personnelSystem.util.SystemConstant;
 import com.personnelSystem.util.WebCommUtil;
 
+
 @Controller
 @RequestMapping(value = "/announcement", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
 public class AnnouncementController {
 	@Autowired
 	private AnnouncementFacade announcementFacade;
+	@Autowired 
+	private AnnouncementService announcementService;
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public PaginatedList<AnnouncementDto> getList(SearchAnnouncementCriteria request){
-		PaginatedList<AnnouncementDto> list = announcementFacade.getAnnouncementList(request);
-		return list;
-
+	public ApiResponse<List<AnnouncementDto>> getList(SearchAnnouncementCriteria request){
+		ApiResponse<List<AnnouncementDto>> apiResponse = new ApiResponse<>();
+		try {
+			apiResponse = WebCommUtil.getSuccessApiResponse(announcementFacade.getAnnouncementList(request));
+			if (null != request && 0 != request.getPagesize()) {
+				apiResponse.setCount(announcementService.countAnnouncement(request));
+			}
+		} catch(Exception exp) {
+			apiResponse.setCode(SystemConstant.Code_GetAnnouncement_DbErr);
+			apiResponse.setMsg(String.format(SystemConstant.Msg_GetAnnouncement_DbErr, exp.getMessage()));
+		}
+		
+		return apiResponse;
 	}
 	
 	@RequestMapping("/detail")
@@ -42,7 +56,7 @@ public class AnnouncementController {
 			apiResponse = WebCommUtil.getSuccessApiResponse(announcementFacade.getDetail(request.getId()));
 		} catch(Exception exp) {
 			apiResponse.setCode(SystemConstant.Code_GetAnnouncement_DbErr);
-			apiResponse.setMessage(String.format(SystemConstant.Msg_GetAnnouncement_DbErr, exp.getMessage()));
+			apiResponse.setMsg(String.format(SystemConstant.Msg_GetAnnouncement_DbErr, exp.getMessage()));
 		}
 		
 		return apiResponse;
@@ -59,14 +73,14 @@ public class AnnouncementController {
 
 		try {
 			ResultDataDto resultDataDto = announcementFacade.insertAnnouncement(request);
-			response.setBody(resultDataDto);
+			response.setData(resultDataDto);
 			response.setCode(SystemConstant.Respose_Code_200);
 			response.setSuccess(true);
 			if (resultDataDto.getResultCode() != SystemConstant.Code_OK) {
 				response.setCode(resultDataDto.getResultCode());
 				response.setSuccess(false);
 			}
-			response.setMessage(resultDataDto.getResultMessage());	
+			response.setMsg(resultDataDto.getResultMessage());	
 		} catch(Exception exp) {
 			return WebCommUtil.getFailApiResponse(exp.getMessage());
 		}
@@ -85,14 +99,14 @@ public class AnnouncementController {
 
 		try {
 			ResultDataDto resultDataDto = announcementFacade.updateAnnouncement(request);
-			response.setBody(resultDataDto);
+			response.setData(resultDataDto);
 			response.setCode(SystemConstant.Respose_Code_200);
 			response.setSuccess(true);
 			if (resultDataDto.getResultCode() != SystemConstant.Code_OK) {
 				response.setCode(resultDataDto.getResultCode());
 				response.setSuccess(false);
 			}
-			response.setMessage(resultDataDto.getResultMessage());	
+			response.setMsg(resultDataDto.getResultMessage());	
 		} catch(Exception exp) {
 			return WebCommUtil.getFailApiResponse(exp.getMessage());
 		}

@@ -43,7 +43,7 @@ public class EmployeeController {
 			apiResponse = WebCommUtil.getSuccessApiResponse(employeeFacade.getDetail(request.getId()));
 		} catch(Exception exp) {
 			apiResponse.setCode(SystemConstant.Code_GetEmployee_DbErr);
-			apiResponse.setMessage(String.format(SystemConstant.Msg_GetEmployee_DbErr, exp.getMessage()));
+			apiResponse.setMsg(String.format(SystemConstant.Msg_GetEmployee_DbErr, exp.getMessage()));
 		}
 		
 		return apiResponse;
@@ -60,14 +60,14 @@ public class EmployeeController {
 
 		try {
 			ResultDataDto resultDataDto = employeeFacade.insert(request);
-			response.setBody(resultDataDto);
+			response.setData(resultDataDto);
 			response.setCode(SystemConstant.Respose_Code_200);
 			response.setSuccess(true);
 			if (resultDataDto.getResultCode() != SystemConstant.Code_OK) {
 				response.setCode(resultDataDto.getResultCode());
 				response.setSuccess(false);
 			}
-			response.setMessage(resultDataDto.getResultMessage());	
+			response.setMsg(resultDataDto.getResultMessage());	
 		} catch(Exception exp) {
 			return WebCommUtil.getFailApiResponse(exp.getMessage());
 		}
@@ -86,14 +86,14 @@ public class EmployeeController {
 
 		try {
 			ResultDataDto resultDataDto = employeeFacade.update(request);
-			response.setBody(resultDataDto);
+			response.setData(resultDataDto);
 			response.setCode(SystemConstant.Respose_Code_200);
 			response.setSuccess(true);
 			if (resultDataDto.getResultCode() != SystemConstant.Code_OK) {
 				response.setCode(resultDataDto.getResultCode());
 				response.setSuccess(false);
 			}
-			response.setMessage(resultDataDto.getResultMessage());	
+			response.setMsg(resultDataDto.getResultMessage());	
 		} catch(Exception exp) {
 			return WebCommUtil.getFailApiResponse(exp.getMessage());
 		}
@@ -113,14 +113,14 @@ public class EmployeeController {
 
 		try {
 			ResultDataDto resultDataDto = employeeFacade.delete(request);
-			response.setBody(resultDataDto);
+			response.setData(resultDataDto);
 			response.setCode(SystemConstant.Respose_Code_200);
 			response.setSuccess(true);
 			if (resultDataDto.getResultCode() != SystemConstant.Code_OK) {
 				response.setCode(resultDataDto.getResultCode());
 				response.setSuccess(false);
 			}
-			response.setMessage(resultDataDto.getResultMessage());	
+			response.setMsg(resultDataDto.getResultMessage());	
 		} catch(Exception exp) {
 			return WebCommUtil.getFailApiResponse(exp.getMessage());
 		}

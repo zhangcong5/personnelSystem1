@@ -249,6 +249,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 			employeeInfoDto.setModifyById(employee.getModifybyid());
 			employeeInfoDto.setModifyDateTime(employee.getModifydatetime());
 			employeeInfoDto.setVersion(employee.getVersion());
+			employeeInfoDto.setIsadmin(employee.getIsadmin());
 		}
 		
 		return employeeInfoDto;
@@ -278,6 +279,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 			employee.setModifybyid(employeeDto.getModifyById());
 			employee.setModifydatetime(employeeDto.getModifyDateTime());
 			employee.setVersion(employeeDto.getVersion());
+			employee.setIsadmin(employeeDto.getIsadmin());
 		}
 		return employee;
 	}

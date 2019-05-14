@@ -28,4 +28,6 @@ public interface AARoleResourceMapper {
     int updateByPrimaryKeySelective(AARoleResource record);
 
     int updateByPrimaryKey(AARoleResource record);
+    
+    int deleteroleResourceByExample(AARoleResourceExample example);
 }

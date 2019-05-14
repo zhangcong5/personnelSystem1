@@ -19,9 +19,8 @@ public class AnnouncementFacadeImpl implements AnnouncementFacade{
 	@Autowired 
 	private AnnouncementService announcementService;
 	
-	public PaginatedList<AnnouncementDto> getAnnouncementList(SearchAnnouncementCriteria criteria) {
+	public List<AnnouncementDto> getAnnouncementList(SearchAnnouncementCriteria criteria) {
 		
-		PaginatedList<AnnouncementDto>  resourceDtos = new PaginatedList<AnnouncementDto>();
 		List<AnnouncementDto> list = new ArrayList<AnnouncementDto>();
 
 		if (null != criteria && 0 != criteria.getPagesize()) {
@@ -37,11 +36,7 @@ public class AnnouncementFacadeImpl implements AnnouncementFacade{
 			list = announcementService.getAnnouncementList(criteria);
 		}
 		
-		resourceDtos.setPagination(criteria);
-		resourceDtos.setRows(list);
-		return resourceDtos;
-		
-		
+		return list;
 	}
 
 	public AnnouncementDto getDetail(Integer announcementId) {

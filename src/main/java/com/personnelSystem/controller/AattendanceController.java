@@ -40,14 +40,14 @@ public class AattendanceController {
 
 		try {
 			ResultDataDto resultDataDto = AattendanceFacade.insert(request);
-			response.setBody(resultDataDto);
+			response.setData(resultDataDto);
 			response.setCode(SystemConstant.Respose_Code_200);
 			response.setSuccess(true);
 			if (resultDataDto.getResultCode() != SystemConstant.Code_OK) {
 				response.setCode(resultDataDto.getResultCode());
 				response.setSuccess(false);
 			}
-			response.setMessage(resultDataDto.getResultMessage());	
+			response.setMsg(resultDataDto.getResultMessage());	
 		} catch(Exception exp) {
 			return WebCommUtil.getFailApiResponse(exp.getMessage());
 		}
@@ -66,14 +66,14 @@ public class AattendanceController {
 
 		try {
 			ResultDataDto resultDataDto = AattendanceFacade.update(request);
-			response.setBody(resultDataDto);
+			response.setData(resultDataDto);
 			response.setCode(SystemConstant.Respose_Code_200);
 			response.setSuccess(true);
 			if (resultDataDto.getResultCode() != SystemConstant.Code_OK) {
 				response.setCode(resultDataDto.getResultCode());
 				response.setSuccess(false);
 			}
-			response.setMessage(resultDataDto.getResultMessage());	
+			response.setMsg(resultDataDto.getResultMessage());	
 		} catch(Exception exp) {
 			return WebCommUtil.getFailApiResponse(exp.getMessage());
 		}

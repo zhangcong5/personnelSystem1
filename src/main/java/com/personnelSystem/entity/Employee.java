@@ -31,6 +31,10 @@ public class Employee {
 
 	private Boolean version;
 
+	private String password;
+
+	private Integer isadmin;
+
 	public Integer getId() {
 		return id;
 	}
@@ -142,4 +146,21 @@ public class Employee {
 	public void setVersion(Boolean version) {
 		this.version = version;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password == null ? null : password.trim();
+	}
+
+	public Integer getIsadmin() {
+		return isadmin;
+	}
+
+	public void setIsadmin(Integer isadmin) {
+		this.isadmin = isadmin;
+	}
+
 }

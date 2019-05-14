@@ -292,7 +292,7 @@
             <include refid="listAnnouncement_Where_Clause" />
         </if>
     </select>
-    <select id="selectByCriteria" parameterType="com.personnelSystem.dto.criteria.SearchAnnouncementCriteria" resultMap="BaseResultMap">
+    <select id="listAnnouncement" parameterType="com.personnelSystem.dto.criteria.SearchAnnouncementCriteria" resultMap="BaseResultMap">
 		select 
 		  <include refid="Base_Column_List" />
 		FROM
@@ -300,7 +300,7 @@
         <if test="_parameter != null">
             <include refid="listAnnouncement_Where_Clause" />
         </if>
-        ORDER BY announcement.createdTime DESC
+        ORDER BY announcement.createTime DESC
         <if test="pagesize != 0">
             LIMIT #{offset}, #{pagesize}
         </if>

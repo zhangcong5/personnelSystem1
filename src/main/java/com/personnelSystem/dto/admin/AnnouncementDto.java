@@ -5,9 +5,15 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.personnelSystem.util.Pagination;
 
 public class AnnouncementDto {
-    private Integer id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8284318614035635042L;
+
+	private Integer id;
 
     private String title;
 

@@ -28,4 +28,6 @@ public interface AAEmployeeRoleMapper {
     int updateByPrimaryKeySelective(AAEmployeeRole record);
 
     int updateByPrimaryKey(AAEmployeeRole record);
+    
+    int deleteSubjectRoleByExample(AAEmployeeRoleExample example);
 }

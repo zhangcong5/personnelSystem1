@@ -83,6 +83,11 @@ public class EmployeeInfoDto {
 		 *标识 
 		 */
 	    private Boolean version;
+	    
+	    /**
+	     * 是否为管理员0：不是，1：是
+	     */
+		private Integer isadmin;
 	
 		public Integer getId() {
 			return id;
@@ -186,10 +191,17 @@ public class EmployeeInfoDto {
 		public void setVersion(Boolean version) {
 			this.version = version;
 		}
-		public EmployeeInfoDto() {}
-		public EmployeeInfoDto(Integer id, String nickname, Integer mgr, int sex, Integer salary, String mobile, String email,
-				Date hiredate, Date terminationDate, Date createdTime, Integer createdById, Integer modifyById,
-				Date modifyDateTime, Integer departmentId, Boolean version) {
+		
+		
+		public Integer getIsadmin() {
+			return isadmin;
+		}
+		public void setIsadmin(Integer isadmin) {
+			this.isadmin = isadmin;
+		}
+		public EmployeeInfoDto(Integer id, String nickname, Integer mgr, int sex, Integer salary, String mobile,
+				String email, Date hiredate, Date terminationDate, Date createdTime, Integer createdById,
+				Integer modifyById, Date modifyDateTime, Integer departmentId, Boolean version, Integer isadmin) {
 			super();
 			this.id = id;
 			this.nickname = nickname;
@@ -206,14 +218,18 @@ public class EmployeeInfoDto {
 			this.modifyDateTime = modifyDateTime;
 			this.departmentId = departmentId;
 			this.version = version;
+			this.isadmin = isadmin;
 		}
+		
 		@Override
 		public String toString() {
-			return "EmployeeInfoDto [Id=" + id + ", nickname=" + nickname + ", mgr=" + mgr + ", sex=" + sex + ", salary="
-					+ salary + ", mobile=" + mobile + ", email=" + email + ", hiredate=" + hiredate
+			return "EmployeeInfoDto [id=" + id + ", nickname=" + nickname + ", mgr=" + mgr + ", sex=" + sex
+					+ ", salary=" + salary + ", mobile=" + mobile + ", email=" + email + ", hiredate=" + hiredate
 					+ ", terminationDate=" + terminationDate + ", createdTime=" + createdTime + ", createdById="
 					+ createdById + ", modifyById=" + modifyById + ", modifyDateTime=" + modifyDateTime
-					+ ", departmentId=" + departmentId + ", version=" + version + "]";
+					+ ", departmentId=" + departmentId + ", version=" + version + ", isadmin=" + isadmin + "]";
 		}
-	
+	 
+		public EmployeeInfoDto() {}
+		
 }
