@@ -19,7 +19,7 @@ public class Pagination implements Serializable {
 	/**
 	 * 默认分页大小. 无需分页时，为0时则表示无需分页。
 	 */
-	private int pagesize = 20;
+	private int pagesize = 10;
 
 	/**
 	 * 当前页

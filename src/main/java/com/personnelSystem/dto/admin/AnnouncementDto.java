@@ -23,11 +23,15 @@ public class AnnouncementDto {
 
     private Integer createbyid;
 
+    private String createbyName;
+
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;
 
     private Integer modifybyid;
+
+    private String modifybyName;
 
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -101,6 +105,26 @@ public class AnnouncementDto {
 
     public Boolean getVersion() {
         return version;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getCreatebyName() {
+        return createbyName;
+    }
+
+    public void setCreatebyName(String createbyName) {
+        this.createbyName = createbyName;
+    }
+
+    public String getModifybyName() {
+        return modifybyName;
+    }
+
+    public void setModifybyName(String modifybyName) {
+        this.modifybyName = modifybyName;
     }
 
     public void setVersion(Boolean version) {

@@ -13,9 +13,13 @@ public class Announcement {
 
     private Integer createbyid;
 
+    private String createbyName;
+
     private Date createtime;
 
     private Integer modifybyid;
+
+    private String modifybyName;
 
     private Date modifydatetime;
 
@@ -91,5 +95,21 @@ public class Announcement {
 
     public void setVersion(Boolean version) {
         this.version = version;
+    }
+
+    public String getCreatebyName() {
+        return createbyName;
+    }
+
+    public void setCreatebyName(String createbyName) {
+        this.createbyName = createbyName;
+    }
+
+    public String getModifybyName() {
+        return modifybyName;
+    }
+
+    public void setModifybyName(String modifybyName) {
+        this.modifybyName = modifybyName;
     }
 }

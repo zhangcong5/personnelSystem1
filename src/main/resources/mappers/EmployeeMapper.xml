@@ -100,11 +100,21 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from employee employee
     where employee.id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByIds" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from employee employee
+    WHERE employee.id IN
+    <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+      #{id}
+    </foreach>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from employee
     where id = #{id,jdbcType=INTEGER}

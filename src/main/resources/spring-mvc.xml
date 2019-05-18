@@ -27,7 +27,7 @@
     <bean id="viewResolver"
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/" />
-		<property name="suffix" value=".htm" />
+		<property name="suffix" value=".html" />
 	</bean>
 
 	<mvc:resources location="/temp/" mapping="/temp/**" />

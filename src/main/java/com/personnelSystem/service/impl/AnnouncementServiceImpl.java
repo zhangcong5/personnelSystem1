@@ -2,8 +2,12 @@ package com.personnelSystem.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import com.personnelSystem.entity.Employee;
+import com.personnelSystem.mapper.EmployeeMapper;
+import com.sun.imageio.plugins.common.I18N;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +29,28 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 	
 	@Autowired
 	private AnnouncementMapper announcementMapper;
+	@Autowired
+	private EmployeeMapper employeeMapper;
 	
 	@Autowired
 	private EmployeeServiceImpl employeeServiceImpl;
 	public List<AnnouncementDto> getAnnouncementList(SearchAnnouncementCriteria criteria) {
-		return transAnnouncementRecordToDtos(announcementMapper.listAnnouncement(criteria));
+		ArrayList<Integer> list = new ArrayList<>();
+		HashMap<Integer, String> map = new HashMap<>();
+		List<Announcement> announcements = announcementMapper.listAnnouncement(criteria);
+		for (Announcement announcement : announcements) {
+			list.add(announcement.getCreatebyid());
+			list.add(announcement.getModifybyid());
+		}
+		List<Employee> employees = employeeMapper.selectByIds(list);
+		for (Employee employee : employees) {
+			map.put(employee.getId(),employee.getNickname());
+		}
+		for (Announcement announcement:announcements) {
+			announcement.setCreatebyName(map.get(announcement.getCreatebyid()));
+			announcement.setModifybyName(map.get(announcement.getModifybyid()));
+		}
+		return transAnnouncementRecordToDtos(announcements);
 	}
 
 	public AnnouncementDto getDetail(Integer announcementId) {
@@ -118,8 +139,8 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 			criteria.andVersionEqualTo(false);
 			criteria.andIdIsNotNull();
 			criteria.andIdEqualTo(announcementDto.getId());
-			criteria.andModifydatetimeIsNotNull();
-			criteria.andModifydatetimeEqualTo(announcementDto.getModifydatetime());
+//			criteria.andModifydatetimeIsNotNull();
+//			criteria.andModifydatetimeEqualTo(announcementDto.getModifydatetime());
 			List<Announcement> records = announcementMapper.selectByExample(example);
 			
 			if (records == null || records.size() == 0 || records.get(0) == null) {
@@ -127,7 +148,6 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 				resultData.setResultMessage(String.format(SystemConstant.Msg_GetAnnouncementID_NotExisted,announcementDto.getId()));
 				return resultData;
 			}
-			
 			Announcement announcement  = null;
 			announcement = records.get(0);
 			Date date = new Date();
@@ -181,7 +201,7 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 	/**
 	 * 数据转化
 	 *    announcement===》announcementDto
-	 * @param records
+	 * @param
 	 * @return
 	 */
 	private AnnouncementDto transAnnouncementRecordToDto(Announcement record) {
@@ -193,8 +213,10 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 			announcementDto.setContent(record.getContent());
 			announcementDto.setState(record.getState());
 			announcementDto.setCreatebyid(record.getCreatebyid());
+			announcementDto.setCreatebyName(record.getCreatebyName());
 			announcementDto.setCreatetime(record.getCreatetime());
 			announcementDto.setModifybyid(record.getModifybyid());
+			announcementDto.setModifybyName(record.getModifybyName());
 			announcementDto.setModifydatetime(record.getModifydatetime());
 			announcementDto.setVersion(record.getVersion());
 		}
