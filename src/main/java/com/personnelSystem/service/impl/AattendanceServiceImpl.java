@@ -26,6 +26,7 @@ public class AattendanceServiceImpl implements AattendanceService{
 	private AattendanceMapper aattendanceMapper;
 
 	public List<AattendanceDto> listAattendanceInfoDto(SearchAattendanceCriteria criteria) {
+		List<Aattendance> aattendances = aattendanceMapper.listAattendance(criteria);
 		return transAattendanceRecordToDtos(aattendanceMapper.listAattendance(criteria));
 	}
 
@@ -114,12 +115,13 @@ public class AattendanceServiceImpl implements AattendanceService{
 	/**
 	 * 数据转化
 	 * Aattendance =====》 AattendanceDto
-	 * @param Aattendance
+	 * @param aattendance
 	 * @return
 	 */
 	private AattendanceDto transAattendanceRecordToDto(Aattendance aattendance) {
 		AattendanceDto aattendanceDto = null;
 		if (aattendance != null) {
+			aattendanceDto = new AattendanceDto();
 			aattendanceDto.setId(aattendance.getId());
 			aattendanceDto.setContent(aattendance.getContent());
 			aattendanceDto.setStartingtime(aattendance.getStartingtime());

@@ -1,5 +1,7 @@
 package com.personnelSystem.dto.admin;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class AattendanceDto {
@@ -8,9 +10,9 @@ public class AattendanceDto {
     private String content;
 
     private Integer type;
-
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date startingtime;
-
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date endtime;
 
     private Integer number;
