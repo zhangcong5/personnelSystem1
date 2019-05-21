@@ -96,8 +96,8 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 			criteria.andVersionEqualTo(false);
 			criteria.andIdIsNotNull();
 			criteria.andIdEqualTo(announcementDto.getId());
-//			criteria.andModifydatetimeIsNotNull();
-//			criteria.andModifydatetimeEqualTo(announcementDto.getModifydatetime());
+			criteria.andModifydatetimeIsNotNull();
+			criteria.andModifydatetimeEqualTo(announcementDto.getModifydatetime());
 			List<Announcement> records = announcementMapper.selectByExample(example);
 			
 			if (records == null || records.size() == 0 || records.get(0) == null) {
@@ -139,8 +139,8 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 			criteria.andVersionEqualTo(false);
 			criteria.andIdIsNotNull();
 			criteria.andIdEqualTo(announcementDto.getId());
-			criteria.andModifydatetimeIsNotNull();
-			criteria.andModifydatetimeEqualTo(announcementDto.getModifydatetime());
+//			criteria.andModifydatetimeIsNotNull();
+//			criteria.andModifydatetimeEqualTo(announcementDto.getModifydatetime());
 			List<Announcement> records = announcementMapper.selectByExample(example);
 			
 			if (records == null || records.size() == 0 || records.get(0) == null) {
@@ -153,6 +153,7 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 			Date date = new Date();
 			announcement.setModifydatetime(date);
 			announcement.setTitle(announcementDto.getTitle());
+			announcement.setState(announcementDto.getState());
 			//TODO
 			
 			if (announcementMapper.updateByExampleSelective(announcement, example) < 1 ) {

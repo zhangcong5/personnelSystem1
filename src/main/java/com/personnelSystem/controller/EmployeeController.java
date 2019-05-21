@@ -127,4 +127,22 @@ public class EmployeeController {
 		
 		return response;
 	}
+
+	@RequestMapping("/login")
+	@ResponseBody
+	public ApiResponse<EmployeeInfoDto> getEmployee(EmployeeInfoDto request){
+		ApiResponse<EmployeeInfoDto> apiResponse = new ApiResponse<>();
+		if (null == request   || null ==  request.getId()|| null == request.getPassword()) {
+			return WebCommUtil.getFailApiResponse(SystemConstant.Msg_Request_Null);
+		}
+
+		try {
+			apiResponse = WebCommUtil.getSuccessApiResponse(employeeFacade.getEmployee(request));
+		} catch(Exception exp) {
+			apiResponse.setCode(SystemConstant.Code_GetEmployee_DbErr);
+			apiResponse.setMsg(String.format(SystemConstant.Msg_GetEmployee_DbErr, exp.getMessage()));
+		}
+
+		return apiResponse;
+	}
 }

@@ -39,15 +39,15 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	public EmployeeInfoDto getDetail(Integer employeeId) {
 		EmployeeInfoDto employeeInfoDto = null;
-		
+
 		if (employeeId != null) {
 			Employee record = employeeMapper.selectByPrimaryKey(employeeId);
-			
+
 			if (record !=null ) {
 				employeeInfoDto = transEmployeeRecordToDto(record);
 			}
 		}
-		
+
 		DepartmentEmployee departmentId = departmentEmployeeMapper.getDepartmentInfo(employeeId);
 		if (departmentId != null && departmentId.getDepartmentid() != null) {
 			employeeInfoDto.setDepartmentId(departmentId.getDepartmentid());
@@ -196,6 +196,23 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	public int count(SearchEmployeeCriteria Criteria) {
 		return employeeMapper.countEmployee(Criteria);
+	}
+
+	@Override
+	public EmployeeInfoDto getEmployee(EmployeeInfoDto employee) {
+		EmployeeInfoDto employeeInfoDto = null;
+
+		if (null != employee.getId() && null != employee.getPassword()) {
+			Employee record = employeeMapper.selectByIdAndPwd(employee.getId(),employee.getPassword());
+			if (record !=null) {
+				if (SystemConstant.Super_Administrator.equals(employee.getId()) && SystemConstant.Super_Administrator_password.equals(employee.getPassword())){
+					record.setId(SystemConstant.Super_Administrator);
+					record.setPassword(SystemConstant.Super_Administrator_password);
+				}
+				employeeInfoDto = transEmployeeRecordToDto(record);
+			}
+		}
+		return employeeInfoDto;
 	}
 
 	/**

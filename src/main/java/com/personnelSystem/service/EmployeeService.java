@@ -51,4 +51,11 @@ public interface EmployeeService {
 	 * @return
 	 */
 	public int count(SearchEmployeeCriteria Criteria);
+	/**
+	 * 验证员工信息
+	 * @param employee
+	 * @return
+	 * @throws Exception
+	 */
+	EmployeeInfoDto getEmployee(EmployeeInfoDto employee);
 }

@@ -63,6 +63,9 @@
 					table = layui.table,
 					layer = layui.layer;
 
+
+
+
 				//自定义验证规则
 				form.verify({
 					nikename: function(value) {
@@ -74,6 +77,18 @@
 
 				//监听提交
 				form.on('submit(add)', function(data) {
+                    var title = document.getElementById("title").value,
+                        content = document.getElementById("content").value;
+					console.log(title)
+                    console.log(content)
+					if (title == "" || null == title){
+                        layer.msg("标题不允许为空!", {time: 2000});
+                        return false;
+					}
+                    if (content == "" || null == content){
+                        layer.msg("内容不允许为空!", {time: 2000});
+                        return false;
+                    }
 					$.ajax({
 						url:"/announcement/insert.do",
 						type:"POST",
@@ -83,10 +98,10 @@
 						async: false,
                         success: function (relult) {
                             if (!data.result=="success") {
-                                parent.layer.msg("添加失败", {time: 2000});
+                                parent.layer.msg("添加失败!", {time: 2000});
                                 return false;
                             } else {
-                                layer.msg("添加成功!", {time: 1000});
+                                parent.layer.msg("添加成功!", {time: 1000});
                                 // 获得frame索引
                                 var index = parent.layer.getFrameIndex(window.name);
                                 //关闭当前frame

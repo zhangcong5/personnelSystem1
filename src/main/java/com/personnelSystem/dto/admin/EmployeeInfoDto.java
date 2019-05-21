@@ -83,13 +83,25 @@ public class EmployeeInfoDto {
 		 *标识 
 		 */
 	    private Boolean version;
+		/**
+		 *密码
+		 */
+	    private String password;
 	    
 	    /**
 	     * 是否为管理员0：不是，1：是
 	     */
 		private Integer isadmin;
-	
-		public Integer getId() {
+
+		public String getPassword() {
+			return password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
+	public Integer getId() {
 			return id;
 		}
 		public void setId(Integer id) {

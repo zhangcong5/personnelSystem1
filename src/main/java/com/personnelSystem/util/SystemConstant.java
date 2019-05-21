@@ -12,7 +12,8 @@ public class SystemConstant {
 	public static final String Respose_Code_500 = "500";	
 	
     public final static String Code_OK = "0";
-    
+    public final static Integer Super_Administrator = 10000;
+    public final static String Super_Administrator_password = "admin";
     
     public final static String Code_DBData_Update_Fail			= "0000001";
     public final static String Code_GetEmployee_DbErr			= "1000009";
@@ -97,6 +98,8 @@ public class SystemConstant {
     public final static String Msg_Aattendance_Update_OK = "考勤编辑成功  【考勤ID：%s】【员工名：%s】\r\n";
     public final static String Msg_Aattendance_Update_Err = "考勤编辑失败 【考勤ID：%s】\r\n【错误信息：%s】\r\n";
     public final static String Msg_GetAattendanceID_NotExisted = "该数据已不存在，请刷新后再操作【考勤ID： %s】。\r\n";
+    public final static String Msg_User_NotNull = "用户不允许为空！";
+    public final static String Msg_PassWord_NotNull = "密码不允许为空！";
     
     public final static String Msg_Role_Insert_OK = "角色新增成功 【角色ID：%s】【角色名：%s】\r\n";
     public final static String Msg_Role_Insert_Err = "角色新增失败 【角色ID：%s】。\r\n【错误信息：%s】\r\n";

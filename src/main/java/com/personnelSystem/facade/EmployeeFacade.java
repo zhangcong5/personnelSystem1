@@ -43,4 +43,12 @@ public interface EmployeeFacade {
 	 * @throws Exception 
 	 */
 	public ResultDataDto update(EmployeeInfoDto employee) throws Exception;
+
+	/**
+	 * 验证员工信息
+	 * @param employee
+	 * @return
+	 * @throws Exception
+	 */
+	EmployeeInfoDto getEmployee(EmployeeInfoDto employee);
 }

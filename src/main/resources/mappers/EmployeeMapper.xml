@@ -105,6 +105,14 @@
     from employee employee
     where employee.id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByIdAndPwd"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from employee employee
+    where id = #{id,jdbcType=INTEGER} AND password = #{password,jdbcType=INTEGER}
+  </select>
+
   <select id="selectByIds" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
@@ -248,6 +256,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     update employee employee
     <set>
