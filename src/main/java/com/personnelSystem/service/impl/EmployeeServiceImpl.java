@@ -205,11 +205,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 		if (null != employee.getId() && null != employee.getPassword()) {
 			Employee record = employeeMapper.selectByIdAndPwd(employee.getId(),employee.getPassword());
 			if (record !=null) {
-				if (SystemConstant.Super_Administrator.equals(employee.getId()) && SystemConstant.Super_Administrator_password.equals(employee.getPassword())){
-					record.setId(SystemConstant.Super_Administrator);
-					record.setPassword(SystemConstant.Super_Administrator_password);
-				}
 				employeeInfoDto = transEmployeeRecordToDto(record);
+			} else if (SystemConstant.Super_Administrator.equals(employee.getId()) && SystemConstant.Super_Administrator_password.equals(employee.getPassword())){
+				employeeInfoDto = new EmployeeInfoDto();
+				employeeInfoDto.setId(SystemConstant.Super_Administrator);
+				employeeInfoDto.setPassword(SystemConstant.Super_Administrator_password);
 			}
 		}
 		return employeeInfoDto;
