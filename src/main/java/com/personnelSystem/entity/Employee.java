@@ -9,6 +9,9 @@ public class Employee {
 
 	private Integer mgr;
 
+	private String mgrName;
+
+
 	private Integer sex;
 
 	private Integer salary;
@@ -163,4 +166,11 @@ public class Employee {
 		this.isadmin = isadmin;
 	}
 
+	public String getMgrName() {
+		return mgrName;
+	}
+
+	public void setMgrName(String mgrName) {
+		this.mgrName = mgrName;
+	}
 }

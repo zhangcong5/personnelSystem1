@@ -2,8 +2,11 @@ package com.personnelSystem.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import com.personnelSystem.entity.*;
+import com.personnelSystem.mapper.DepartmentMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.personnelSystem.dto.admin.EmployeeInfoDto;
 import com.personnelSystem.dto.criteria.SearchEmployeeCriteria;
-import com.personnelSystem.entity.DepartmentEmployee;
-import com.personnelSystem.entity.DepartmentEmployeeExample;
 import com.personnelSystem.entity.DepartmentEmployeeExample.Criteria;
-import com.personnelSystem.entity.Employee;
-import com.personnelSystem.entity.EmployeeExample;
 import com.personnelSystem.mapper.DepartmentEmployeeMapper;
 import com.personnelSystem.mapper.EmployeeMapper;
 import com.personnelSystem.service.EmployeeService;
@@ -33,8 +32,24 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Autowired
 	private DepartmentEmployeeMapper departmentEmployeeMapper;
 
+	@Autowired
+	private DepartmentMapper departmentMapper;
+
 	public List<EmployeeInfoDto> listEmployeeInfoDto(SearchEmployeeCriteria Criteria) {
-		return transEmployeeRecordToDtos(employeeMapper.listEmployee(Criteria));
+		List<Employee> employeeList = employeeMapper.listEmployee(Criteria);
+		ArrayList<Integer> list = new ArrayList<>();
+		HashMap<Integer, String> map = new HashMap<>();
+		for (Employee employee : employeeList) {
+			list.add(employee.getMgr());
+		}
+		List<Employee> employees = employeeMapper.selectByIds(list);
+		for (Employee employee : employees) {
+			map.put(employee.getId(),employee.getNickname());
+		}
+		for (Employee employee : employeeList) {
+			employee.setMgrName(map.get(employee.getMgr()));
+		}
+		return transEmployeeRecordToDtos(employeeList);
 	}
 
 	public EmployeeInfoDto getDetail(Integer employeeId) {
@@ -244,7 +259,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 					
 					DepartmentEmployee departmentId = departmentEmployeeMapper.getDepartmentInfo(record.getId());
 					if (departmentId != null && departmentId.getDepartmentid() != null) {
+						Department department = departmentMapper.selectByPrimaryKey(departmentId.getDepartmentid());
 						subjectInfoDto.setDepartmentId(departmentId.getDepartmentid());
+						subjectInfoDto.setDepartmentName(department.getDepartmentname());
 					}
 					if (subjectInfoDto != null) {
 						list.add(subjectInfoDto);
@@ -270,6 +287,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 			employeeInfoDto.setSex(employee.getSex());
 			employeeInfoDto.setSalary(employee.getSalary());
 			employeeInfoDto.setMgr(employee.getMgr());
+			employeeInfoDto.setMgrName(employee.getMgrName());
 			employeeInfoDto.setMobile(employee.getMobile());
 			employeeInfoDto.setEmail(employee.getEmail());
 			employeeInfoDto.setHiredate(employee.getHiredate());

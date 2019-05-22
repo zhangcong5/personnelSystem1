@@ -20,6 +20,10 @@ public class EmployeeInfoDto {
 		 */
 		private Integer mgr;
 		/**
+		 * 员工领导名称
+		 */
+		private String mgrName;
+		/**
 		 * 员工性别
 		 */
 		private int sex;
@@ -78,6 +82,11 @@ public class EmployeeInfoDto {
 		 *部门编号
 		 */
 		private Integer departmentId;
+
+		/**
+		 *部门编号
+		 */
+		private String departmentName;
 		
 		/**
 		 *标识 
@@ -93,6 +102,22 @@ public class EmployeeInfoDto {
 	     */
 		private Integer isadmin;
 
+		public String getDepartmentName() {
+			return departmentName;
+		}
+
+		public void setDepartmentName(String departmentName) {
+			this.departmentName = departmentName;
+		}
+
+		public String getMgrName() {
+			return mgrName;
+		}
+
+		public void setMgrName(String mgrName) {
+			this.mgrName = mgrName;
+		}
+
 		public String getPassword() {
 			return password;
 		}
@@ -101,7 +126,7 @@ public class EmployeeInfoDto {
 			this.password = password;
 		}
 
-	public Integer getId() {
+		public Integer getId() {
 			return id;
 		}
 		public void setId(Integer id) {

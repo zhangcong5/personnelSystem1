@@ -1,11 +1,11 @@
 	var mytable = null;
-	layui.use(['laydate', 'layer', 'table', 'carousel', 'upload', 'element'], function(){
+	layui.use(['laydate', 'layer', 'table', 'carousel', 'upload', 'element','jquery'], function(){
         var table = layui.table //表格
-		,$ = layui.jquery
+            ,$ = layui.jquery
 		mytable =  table.render({
 			elem: '#employee-list'
-			,url:'/employee/list.do'
-			,cellMinWidth: 100
+            ,url:'/employee/list.do'
+            ,cellMinWidth: 100
 			,method:'POST'
 			,request: {
 				pageName: 'page' //页码的参数名称，默认：page
@@ -24,8 +24,8 @@
 								return "女";
 							}
 			    	      }}
-			      ,{field: 'mgr', title: '上级', width:100, align:'center'}
-			      ,{field: 'departmentId', title: '部门', width:100, align:'center'}
+			      ,{field: 'mgrName', title: '上级', width:100, align:'center'}
+			      ,{field: 'departmentName', title: '部门', width:100, align:'center'}
 			      ,{field: 'mobile', title: '手机号', width:150, align:'center'}
 			      ,{field: 'email', title: '邮箱', width:150, align:'center'}
 		    ]]
@@ -47,8 +47,8 @@
                     , element = layui.element; //元素操作
         		mytable =  table.render({
         			elem: '#employee-list'
-        			,url:'/employee/list.do'
-        			,cellMinWidth: 100
+                    ,url:'/employee/list.do'
+                    ,cellMinWidth: 100
         			,method:'POST'
         			, where: {id: id,nickname: nickname,email: email,mobile: mobile}
         			,request: {
@@ -68,8 +68,8 @@
         								return "女";
         							}
         			    	      }}
-        			      ,{field: 'mgr', title: '上级', width:80, align:'center'}
-        			      ,{field: 'departmentId', title: '部门', width:80, align:'center'}
+        			      ,{field: 'mgrName', title: '上级', width:80, align:'center'}
+        			      ,{field: 'departmentName', title: '部门', width:80, align:'center'}
         			      ,{field: 'mobile', title: '手机号', width:150, align:'center'}
         			      ,{field: 'email', title: '邮箱', width:200, align:'center'}
         		    ]]

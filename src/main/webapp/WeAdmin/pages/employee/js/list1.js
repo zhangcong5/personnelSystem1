@@ -29,8 +29,8 @@
 								return "女";
 							}
 			    	      }}
-			      ,{field: 'mgr', title: '上级', width:80, align:'center'}
-			      ,{field: 'departmentId', title: '部门', width:80, align:'center'}
+			      ,{field: 'mgrName', title: '上级', width:80, align:'center'}
+			      ,{field: 'departmentName', title: '部门', width:80, align:'center'}
 			      ,{field: 'salary', title: '薪水', width:80, align:'center'}
 			      ,{field: 'mobile', title: '手机号', width:150, align:'center'}
 			      ,{field: 'email', title: '邮箱', width:200, align:'center'}
@@ -108,8 +108,8 @@
         								return "女";
         							}
         			    	      }}
-        			      ,{field: 'mgr', title: '上级', width:80, align:'center'}
-        			      ,{field: 'departmentId', title: '部门', width:80, align:'center'}
+        			      ,{field: 'mgrName', title: '上级', width:80, align:'center'}
+        			      ,{field: 'departmentName', title: '部门', width:80, align:'center'}
         			      ,{field: 'salary', title: '薪水', width:80, align:'center'}
         			      ,{field: 'mobile', title: '手机号', width:150, align:'center'}
         			      ,{field: 'email', title: '邮箱', width:200, align:'center'}
