@@ -43,6 +43,11 @@ public class DepartmentFacadeImpl implements DepartmentFacade{
 		
 	}
 
+	@Override
+	public List<DepartmentInfoDto> getAllDepartment() {
+		return departmentService.getAllDepartment();
+	}
+
 	public DepartmentInfoDto getDetail(Integer departmentId) {
 		return departmentService.getDetail(departmentId);
 	}

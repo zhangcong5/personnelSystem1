@@ -38,6 +38,19 @@ public class DepartmentServiceImpl implements DepartmentService{
 		return transDepartmentRecordToDtos(departmentMapper.selectByCriteria(criteria));
 	}
 
+	@Override
+	public List<DepartmentInfoDto> getAllDepartment() {
+		List<DepartmentInfoDto> departmentInfoDtos = null;
+		List<Department> departmentList = departmentMapper.selectAll();
+
+		if (departmentList.size() > 0) {
+			departmentInfoDtos = transDepartmentRecordToDtos(departmentList);
+		}
+
+
+		return departmentInfoDtos;
+	}
+
 	public DepartmentInfoDto getDetail(Integer departmentId) {
 		
 		DepartmentInfoDto departmentInfoDto = null;

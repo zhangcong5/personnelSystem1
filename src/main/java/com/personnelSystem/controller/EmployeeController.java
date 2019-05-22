@@ -159,4 +159,18 @@ public class EmployeeController {
 
 		return apiResponse;
 	}
+
+	@RequestMapping("/personnelList")
+	@ResponseBody
+	public  ApiResponse<List<EmployeeInfoDto>> getPersonnelList(){
+		ApiResponse<List<EmployeeInfoDto>> apiResponse = new ApiResponse<>();
+		try {
+			apiResponse = WebCommUtil.getSuccessApiResponse(employeeFacade.getEmployeeList());
+		} catch(Exception exp) {
+			apiResponse.setCode(SystemConstant.Code_GetEmployee_DbErr);
+			apiResponse.setMsg(String.format(SystemConstant.Msg_GetEmployee_DbErr, exp.getMessage()));
+		}
+
+		return apiResponse;
+	}
 }

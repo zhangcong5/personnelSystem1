@@ -294,4 +294,11 @@
             LIMIT #{offset}, #{pagesize}
         </if>
     </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    FROM
+    department
+  </select>
 </mapper>

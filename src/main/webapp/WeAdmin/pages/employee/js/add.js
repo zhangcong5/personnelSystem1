@@ -35,7 +35,16 @@ debugger;
 /*			        	hiredate = document.getElementById("hiredate").value,
 			        	terminationDate = document.getElementById("terminationDate").value,*/
 			        	password = document.getElementById("repass").value;
-			        
+                    data = {
+                        nickname:nickname,
+                        sex:sex,
+                        mgr:mgr,
+                        salary:salary,
+                        mobile:mobile,
+                        email:email,
+                        password:password,
+
+					}
 			        debugger;
 					if (nickname == "" || null == nickname){
 			            layer.msg("昵称不允许为空!", {time: 2000});
@@ -52,7 +61,7 @@ debugger;
 					$.ajax({
 						url:"/employee/insert.do",
 						type:"POST",
-						data:data.field,
+						data:data,
 						dataType:"json",
 						contentType:"application/x-www-form-urlencoded;charset=utf-8",
 			            success: function (relult) {

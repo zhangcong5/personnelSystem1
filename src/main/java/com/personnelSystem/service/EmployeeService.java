@@ -58,4 +58,10 @@ public interface EmployeeService {
 	 * @throws Exception
 	 */
 	EmployeeInfoDto getEmployee(EmployeeInfoDto employee);
+	/**
+	 *  查询员工对象列表
+	 * @param
+	 * @return
+	 */
+	List<EmployeeInfoDto> getEmployeeList();
 }

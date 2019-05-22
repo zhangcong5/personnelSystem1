@@ -38,10 +38,27 @@
 		                <span class="we-red">*</span>上级
 		            </label>
 					<div class="layui-input-inline">
-						<input type="text" id="mgr" name="mgr" autocomplete="off" class="layui-input">
+						<!--<input type="text" id="mgr" name="mgr" autocomplete="off" class="layui-input">-->
+						<select id="superior" name="superior" lay-verify="required">
+							<!--<select id="type" name="type" class="valid" lay-verify="required" lay-search="">-->
+							<option value=""></option>
+						</select>
 					</div>
 				</div>
-				
+
+				<div class="layui-form-item">
+					<label for="mgr" class="layui-form-label">
+						<span class="we-red">*</span>部门
+					</label>
+					<div class="layui-input-inline">
+						<!--<input type="text" id="mgr" name="mgr" autocomplete="off" class="layui-input">-->
+						<select id="department" name="department" lay-verify="required">
+							<!--<select id="type" name="type" class="valid" lay-verify="required" lay-search="">-->
+							<option value=""></option>
+						</select>
+					</div>
+				</div>
+
 				<div class="layui-form-item">
 					<label for="salary" class="layui-form-label">
 		                <span class="we-red">*</span>薪水
@@ -65,7 +82,8 @@
 		                <span class="we-red">*</span>邮箱
 		            </label>
 					<div class="layui-input-inline">
-						<input type="text" id="email" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+						<!--<input type="text" id="email" name="email" lay-verify="email" autocomplete="off" class="layui-input">-->
+						<input id="email" name="email" class="layui-input" type="text" autocomplete="off" placeholder="请输入邮箱" lay-verify="email" onkeyup="this.value=this.value.replace(/\s+/g,'')">
 					</div>
 				</div>
 
@@ -90,7 +108,7 @@
 	                	  <span class="we-red">*</span>密码
 	              	</label>
 					<div class="layui-input-inline">
-						<input type="password" id="pass" name="pass" required="" lay-verify="pass" autocomplete="off" class="layui-input">
+						<input type="password" id="pass" name="pass" required="" lay-verify="pass" autocomplete="off" class="layui-input" onkeyup="this.value=this.value.replace(/\s+/g,'')">
 					</div>
 					<div class="layui-form-mid layui-word-aux">
 						6到16个字符
@@ -106,18 +124,20 @@
 					</div>
 				</div>
 				
-				<div class="layui-form-item">
-				    <label for="L_sex" class="layui-form-label"><span class="we-red">*</span>部门</label>
-				    <div class="layui-input-block" id="L_sex">
-				      <input type="radio" name="department" value="1" title="产品部" checked>
-				      <input type="radio" name="department" value="2" title="销售部">
-				      <input type="radio" name="department" value="3" title="技术部">
-				      <input type="radio" name="department" value="4" title="财务部">
-				      <input type="radio" name="department" value="5" title="行政部">
-				      <input type="radio" name="department" value="6" title="市场部">
-				    </div>
-				</div>
-				
+				<!--<div class="layui-form-item">-->
+				    <!--<label for="L_sex" class="layui-form-label"><span class="we-red">*</span>部门</label>-->
+				    <!--<div class="layui-input-block" id="L_sex">-->
+				      <!--<input type="radio" name="department" value="1" title="产品部" checked>-->
+				      <!--<input type="radio" name="department" value="2" title="销售部">-->
+				      <!--<input type="radio" name="department" value="3" title="技术部">-->
+				      <!--<input type="radio" name="department" value="4" title="财务部">-->
+				      <!--<input type="radio" name="department" value="5" title="行政部">-->
+				      <!--<input type="radio" name="department" value="6" title="市场部">-->
+				    <!--</div>-->
+				<!--</div>-->
+
+
+
 				<div class="layui-form-item">
 					<label for="L_repass" class="layui-form-label">
               </label>
@@ -127,6 +147,53 @@
 		</div>
 <!-- 		<script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script> -->		
 		<script src="js/add.js" type="text/javascript"></script>
+		<script>
+            layui.use(['form','jquery'], function(){
+
+                //----------模块----------
+                var form = layui.form
+					,$=layui.jquery;
+
+                //动态添加下拉框     同时可以设置默认值
+                $.ajax({
+                    url:'/employee/personnelList.do',
+                    dataType:'json',
+                    type:'post',
+                    success:function(result){
+
+                        $.each(result.data,function(index,item){
+                            console.log(item);
+                            //option  第一个参数是页面显示的值，第二个参数是传递到后台的值
+                            $('#superior').append(new Option(item.nickname,item.id));//往下拉菜单里添加元素
+                            //设置value（这个值就可以是在更新的时候后台传递到前台的值）为2的值为默认选中
+                            $('#superior').val(1);
+                        })
+
+                        form.render(); //更新全部表单内容
+                        //form.render('select'); //刷新表单select选择框渲染
+                    }
+                });
+
+                $.ajax({
+                    url:'/department/alldepartment.do',
+                    dataType:'json',
+                    type:'post',
+                    success:function(res){
+
+                        $.each(res.data,function(index,item){
+                            console.log(item);
+                            //option  第一个参数是页面显示的值，第二个参数是传递到后台的值
+                            $('#department').append(new Option(item.departmentname,item.id));//往下拉菜单里添加元素
+                            //设置value（这个值就可以是在更新的时候后台传递到前台的值）为2的值为默认选中
+                            $('#department').val(1);
+                        })
+
+                        form.render(); //更新全部表单内容
+                        //form.render('select'); //刷新表单select选择框渲染
+                    }
+                });
+            });
+		</script>
 	</body>
 
 </html>

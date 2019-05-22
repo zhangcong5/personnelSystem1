@@ -161,7 +161,19 @@ public class DepartmentController {
 			
 			return response;
 	}
-	
-	
-	
+
+	@RequestMapping("/alldepartment")
+	@ResponseBody
+	public ApiResponse<List<DepartmentInfoDto>> getAllDepartment(){
+		ApiResponse<List<DepartmentInfoDto>> apiResponse = new ApiResponse<>();
+		try {
+			apiResponse = WebCommUtil.getSuccessApiResponse(departmentFacade.getAllDepartment());
+		} catch(Exception exp) {
+			apiResponse.setCode(SystemConstant.Code_GetAnnouncement_DbErr);
+			apiResponse.setMsg(String.format(SystemConstant.Msg_GetAnnouncement_DbErr, exp.getMessage()));
+		}
+
+		return apiResponse;
+	}
+
 }

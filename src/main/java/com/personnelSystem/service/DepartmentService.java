@@ -9,6 +9,7 @@ import com.personnelSystem.util.ResultDataDto;
 
 public interface DepartmentService {
 	public List<DepartmentInfoDto> getDepartmentList(SearchDepartmentCriteria Criteria);
+	public List<DepartmentInfoDto> getAllDepartment();
 	public DepartmentInfoDto getDetail(Integer departmentId);		
 	public ResultDataDto insertDepartment(DepartmentInfoDto department) throws Exception;
 	public ResultDataDto deleteDepartment(DepartmentInfoDto departmentInfoDto) throws Exception;

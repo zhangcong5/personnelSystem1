@@ -215,6 +215,19 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return employeeInfoDto;
 	}
 
+	@Override
+	public List<EmployeeInfoDto> getEmployeeList() {
+		List<EmployeeInfoDto> employeeInfoDtos = null;
+
+
+		List<Employee> employees = employeeMapper.selectAll();
+		if (employees.size() > 0) {
+			employeeInfoDtos = transEmployeeRecordToDtos(employees);
+		}
+
+		return employeeInfoDtos;
+	}
+
 	/**
 	 * 数据转化
 	 *     Employee ==》 EmployeeInfoDto
