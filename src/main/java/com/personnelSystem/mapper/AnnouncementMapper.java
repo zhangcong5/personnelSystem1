@@ -9,7 +9,8 @@ import com.personnelSystem.entity.Announcement;
 import com.personnelSystem.entity.AnnouncementExample;
 
 public interface AnnouncementMapper {
-    long countByExample(AnnouncementExample example);
+
+	long countByExample(AnnouncementExample example);
 
     int deleteByExample(AnnouncementExample example);
 

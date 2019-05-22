@@ -3,7 +3,8 @@ package com.personnelSystem.entity;
 import java.util.Date;
 
 public class Announcement {
-    private Integer id;
+
+	private Integer id;
 
     private String title;
 

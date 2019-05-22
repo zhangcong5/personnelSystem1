@@ -139,8 +139,8 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 			criteria.andVersionEqualTo(false);
 			criteria.andIdIsNotNull();
 			criteria.andIdEqualTo(announcementDto.getId());
-//			criteria.andModifydatetimeIsNotNull();
-//			criteria.andModifydatetimeEqualTo(announcementDto.getModifydatetime());
+			criteria.andModifydatetimeIsNotNull();
+			criteria.andModifydatetimeEqualTo(announcementDto.getModifydatetime());
 			List<Announcement> records = announcementMapper.selectByExample(example);
 			
 			if (records == null || records.size() == 0 || records.get(0) == null) {
@@ -148,13 +148,14 @@ public class AnnouncementServiceImpl implements AnnouncementService{
 				resultData.setResultMessage(String.format(SystemConstant.Msg_GetAnnouncementID_NotExisted,announcementDto.getId()));
 				return resultData;
 			}
+			
 			Announcement announcement  = null;
 			announcement = records.get(0);
 			Date date = new Date();
 			announcement.setModifydatetime(date);
 			announcement.setTitle(announcementDto.getTitle());
 			announcement.setState(announcementDto.getState());
-			//TODO
+			announcement.setContent(announcementDto.getContent());
 			
 			if (announcementMapper.updateByExampleSelective(announcement, example) < 1 ) {
 				resultData.setResultCode(SystemConstant.Code_DBData_Update_Fail);

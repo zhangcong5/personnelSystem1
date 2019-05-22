@@ -26,7 +26,6 @@ public class AattendanceServiceImpl implements AattendanceService{
 	private AattendanceMapper aattendanceMapper;
 
 	public List<AattendanceDto> listAattendanceInfoDto(SearchAattendanceCriteria criteria) {
-		List<Aattendance> aattendances = aattendanceMapper.listAattendance(criteria);
 		return transAattendanceRecordToDtos(aattendanceMapper.listAattendance(criteria));
 	}
 
@@ -66,6 +65,7 @@ public class AattendanceServiceImpl implements AattendanceService{
 			
 			Aattendance aattendance =null;
 			aattendance = records.get(0);
+			aattendance.setState(aattendanceDto.getState());
 			
 			if (aattendanceMapper.updateByExampleSelective(aattendance, example) < 1 ) {
 				resultData.setResultCode(SystemConstant.Code_DBData_Update_Fail);
@@ -115,7 +115,7 @@ public class AattendanceServiceImpl implements AattendanceService{
 	/**
 	 * 数据转化
 	 * Aattendance =====》 AattendanceDto
-	 * @param aattendance
+	 * @param Aattendance
 	 * @return
 	 */
 	private AattendanceDto transAattendanceRecordToDto(Aattendance aattendance) {

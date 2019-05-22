@@ -14,7 +14,7 @@ public interface AnnouncementService {
 	 * @return
 	 */
 	public List<AnnouncementDto> getAnnouncementList(SearchAnnouncementCriteria Criteria);
-
+	
 	/**
 	 * 增加公告数据信息
 	 * @param Announcement

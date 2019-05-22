@@ -1,14 +1,3 @@
-/*
- * @Author: https://github.com/WangEn
- * @Author: https://gitee.com/lovetime/
- * @Date:   2018-01-01
- * @lastModify 2018-3-27 15:00:35
- * +----------------------------------------------------------------------
- * | Weadmin [ 后台管理模板 ]
- * | 基于Layui http://www.layui.com/
- * +----------------------------------------------------------------------
- */
-
 layui.define(['jquery', 'form', 'layer', 'element'], function(exports) {
 	var $ = layui.jquery,
 		form = layui.form,
@@ -355,12 +344,53 @@ layui.define(['jquery', 'form', 'layer', 'element'], function(exports) {
                 body.contents().find("#content").val(date.content);
                 body.contents().find("#state").val(date.state);
                 body.contents().find("#id").val(date.id);
+                body.contents().find("#modifydatetime").val(date.modifydatetime);
+				body.contents().find("#modifyDateTime").val(date.modifyDateTime);
+				body.contents().find("#departmentname").val(date.departmentname);
+				body.contents().find("#mobile").val(date.mobile);
 			},
 			error: function(layero, index) {
 				alert("失败!");
 			}
 		});
 	}
+
+/*	window.WeAdminEditD = function(title, url, date, w, h) {
+		
+		if(title == null || title == '') {
+			title = false;
+		};
+		if(url == null || url == '') {
+			url = "404.html";
+		};
+		if(w == null || w == '') {
+			w = ($(window).width() * 0.9);
+		};
+		if(h == null || h == '') {
+			h = ($(window).height() - 50);
+		};
+		layer.open({
+			type: 2,
+			area: [w + 'px', h + 'px'],
+			fix: false, //不固定
+			maxmin: true,
+			shadeClose: true,
+			shade: 0.4,
+			title: title,
+			content: url,
+			success: function(layero, index) {
+				//向iframe页的id=house的元素传值  // 参考 https://yq.aliyun.com/ziliao/133150
+				var body = layer.getChildFrame('body', index);
+				body.contents().find("#id").val(date.id);
+				body.contents().find("#modifyDateTime").val(date.modifyDateTime);
+				body.contents().find("#departmentname").val(date.departmentname);
+				body.contents().find("#mobile").val(date.mobile);
+			},
+			error: function(layero, index) {
+				alert("失败!");
+			}
+		});
+	}*/
 
 	/**
 	 *@todo tab监听：点击tab项对应的关闭按钮事件

@@ -30,24 +30,23 @@
 
 		<div class="weadmin-body">
 			<div class="layui-row">
-				<form class="layui-form layui-col-md12 we-search">
-					员工搜索：
-					<div class="layui-inline">
-						<input type="text" id="id" name="id" placeholder="员工号" autocomplete="off" class="layui-input"/>
-					</div>
-					<div class="layui-inline">
-						<input type="text" id="nickname" name="nickname" placeholder="名称" autocomplete="off" class="layui-input"/>
-					</div>
-					<div class="layui-inline">
-						<input type="text" id="email" name="email" placeholder="邮箱" autocomplete="off" class="layui-input"/>
-					</div>
-					<div class="layui-inline">
-						<input type="text" id="mobile" name="mobile" placeholder="手机号" autocomplete="off" class="layui-input"/>
-					</div>
-					<button class="layui-btn" lay-submit="" lay-filter="sreach" id="select-btn">
-						<i class="layui-icon layui-icon-search"></i>
-					</button>
-				</form>
+				员工搜索：
+				<div class="layui-inline" >
+					<input type="text" name="id" id="id" placeholder="员工号" autocomplete="off" class="layui-input"/>
+				</div>
+				<div class="layui-inline" >
+					<input type="text" name="nickname" id="nickname" placeholder="昵称" autocomplete="off" class="layui-input"/>
+				</div>
+				<div class="layui-inline" >
+					<input type="text" name="email" id="email" placeholder="邮箱" autocomplete="off" class="layui-input"/>
+				</div>
+				<div class="layui-inline" >
+					<input type="text" name="mobile" id="mobile" placeholder="手机号" autocomplete="off" class="layui-input"/>
+				</div>
+
+				<button class="layui-btn"  lay-filter="sreach" id="search">
+					<i class="layui-icon layui-icon-search"></i>搜索
+				</button>
 			</div>
 			
 			<table class="layui-table" id="employee-list" lay-filter="test">

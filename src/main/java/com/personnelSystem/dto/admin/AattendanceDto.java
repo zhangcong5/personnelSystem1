@@ -1,8 +1,10 @@
 package com.personnelSystem.dto.admin;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AattendanceDto {
     private Integer id;
@@ -10,9 +12,13 @@ public class AattendanceDto {
     private String content;
 
     private Integer type;
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startingtime;
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endtime;
 
     private Integer number;

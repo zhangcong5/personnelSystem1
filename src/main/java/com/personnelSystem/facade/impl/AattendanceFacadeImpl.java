@@ -19,8 +19,7 @@ public class AattendanceFacadeImpl implements AattendanceFacade{
 	@Autowired
 	private AattendanceService aattendanceService;
 
-	public PaginatedList<AattendanceDto> listAattendanceDto(SearchAattendanceCriteria Criteria) {
-		PaginatedList<AattendanceDto>  resourceDtos = new PaginatedList<AattendanceDto>();
+	public List<AattendanceDto> listAattendanceDto(SearchAattendanceCriteria Criteria) {
 		List<AattendanceDto> list = new ArrayList<AattendanceDto>();
 
 		if (null != Criteria && 0 != Criteria.getPagesize()) {
@@ -35,10 +34,7 @@ public class AattendanceFacadeImpl implements AattendanceFacade{
 		} else {
 			list = aattendanceService.listAattendanceInfoDto(Criteria);
 		}
-		
-		resourceDtos.setPagination(Criteria);
-		resourceDtos.setRows(list);
-		return resourceDtos;
+		return list;
 	}
 
 	public ResultDataDto insert(AattendanceDto aattendance) throws Exception {

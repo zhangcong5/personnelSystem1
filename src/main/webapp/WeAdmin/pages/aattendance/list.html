@@ -30,15 +30,14 @@
 
 		<div class="weadmin-body">
 			<div class="layui-row">
-				<form class="layui-form layui-col-md12 we-search" lay-filter="layform">
-					单据搜索：
-					<div class="layui-inline">
-						<input type="text" id="content" name="content" placeholder="申请内容" autocomplete="off" class="layui-input"/>
-					</div>
-					<button class="layui-btn" lay-submit="" lay-filter="sreach" id="select-btn">
-						<i class="layui-icon layui-icon-search"></i>
-					</button>
-				</form>
+				单据搜索：
+				<div class="layui-inline" >
+					<input type="text" name="content" id="content" placeholder="申请内容" autocomplete="off" class="layui-input"/>
+				</div>
+
+				<button class="layui-btn"  lay-filter="sreach" id="search">
+					<i class="layui-icon layui-icon-search"></i>搜索
+				</button>
 			</div>
 			<div class="weadmin-block">
 				<button class="layui-btn" onclick="WeAdminShow('添加单据','./add.html',600,400)">
@@ -46,7 +45,7 @@
 				</button>
 			</div>
 			
-			<table class="layui-table" id="aattendance-list" lay-filter="test">
+			<table class="layui-table" id="attendance-list" lay-filter="test">
 			</table>	
 			
 		</div>

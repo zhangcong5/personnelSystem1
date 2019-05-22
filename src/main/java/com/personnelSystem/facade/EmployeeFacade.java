@@ -1,5 +1,7 @@
 package com.personnelSystem.facade;
 
+import java.util.List;
+
 import com.personnelSystem.dto.admin.EmployeeInfoDto;
 import com.personnelSystem.dto.criteria.SearchEmployeeCriteria;
 import com.personnelSystem.util.PaginatedList;
@@ -12,7 +14,7 @@ public interface EmployeeFacade {
 	 * @param Criteria
 	 * @return
 	 */
-	public PaginatedList<EmployeeInfoDto> listEmployeeDto(SearchEmployeeCriteria Criteria);
+	public List<EmployeeInfoDto> listEmployeeDto(SearchEmployeeCriteria Criteria);
 	
 	/**
 	 * 根据ID获取员工信息详情

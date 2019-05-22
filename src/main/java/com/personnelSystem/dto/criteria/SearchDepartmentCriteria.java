@@ -22,7 +22,7 @@ public class SearchDepartmentCriteria extends Pagination{
     /**
      * 部门所属公司
      */
-    private String company;
+    private String mobile;
 
 	public String getDepartmentName() {
 		return departmentName;
@@ -40,12 +40,12 @@ public class SearchDepartmentCriteria extends Pagination{
 		this.Id = Id;
 	}
 
-	public String getCompany() {
-		return company;
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 	

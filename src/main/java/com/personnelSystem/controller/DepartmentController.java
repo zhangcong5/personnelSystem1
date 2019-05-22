@@ -1,15 +1,20 @@
 package com.personnelSystem.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.personnelSystem.dto.admin.AnnouncementDto;
 import com.personnelSystem.dto.admin.DepartmentInfoDto;
 import com.personnelSystem.dto.admin.EmployeeInfoDto;
+import com.personnelSystem.dto.criteria.SearchAnnouncementCriteria;
 import com.personnelSystem.dto.criteria.SearchDepartmentCriteria;
 import com.personnelSystem.facade.DepartmentFacade;
+import com.personnelSystem.service.DepartmentService;
 import com.personnelSystem.util.ApiResponse;
 import com.personnelSystem.util.PaginatedList;
 import com.personnelSystem.util.ResultDataDto;
@@ -22,12 +27,24 @@ public class DepartmentController {
 
 	@Autowired
 	private DepartmentFacade departmentFacade;
+	@Autowired 
+	private DepartmentService departmentService;
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public PaginatedList<DepartmentInfoDto> getList(SearchDepartmentCriteria request){
-		PaginatedList<DepartmentInfoDto> list = departmentFacade.getDepartmentList(request);
-		return list;
+	public ApiResponse<List<DepartmentInfoDto>> getList(SearchDepartmentCriteria request){
+		ApiResponse<List<DepartmentInfoDto>> apiResponse = new ApiResponse<>();
+		try {
+			apiResponse = WebCommUtil.getSuccessApiResponse(departmentFacade.getDepartmentList(request));
+			if (null != request && 0 != request.getPagesize()) {
+				apiResponse.setCount(departmentService.countDepartment(request));
+			}
+		} catch(Exception exp) {
+			apiResponse.setCode(SystemConstant.Code_GetAnnouncement_DbErr);
+			apiResponse.setMsg(String.format(SystemConstant.Msg_GetAnnouncement_DbErr, exp.getMessage()));
+		}
+		
+		return apiResponse;
 	}
 	
 	@RequestMapping("/listemployee")

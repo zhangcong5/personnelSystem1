@@ -1,8 +1,9 @@
 package com.personnelSystem.facade;
 
+import java.util.List;
+
 import com.personnelSystem.dto.admin.AattendanceDto;
 import com.personnelSystem.dto.criteria.SearchAattendanceCriteria;
-import com.personnelSystem.util.PaginatedList;
 import com.personnelSystem.util.ResultDataDto;
 
 public interface AattendanceFacade {
@@ -12,7 +13,7 @@ public interface AattendanceFacade {
 	 * @param Criteria
 	 * @return
 	 */
-	public PaginatedList<AattendanceDto> listAattendanceDto(SearchAattendanceCriteria Criteria);
+	public List<AattendanceDto> listAattendanceDto(SearchAattendanceCriteria Criteria);
 	
 	/**
 	 * 增加考勤数据信息

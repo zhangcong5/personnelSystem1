@@ -81,8 +81,8 @@ public class DepartmentServiceImpl implements DepartmentService{
 			criteria.andVersionEqualTo(false);
 			criteria.andIdIsNotNull();
 			criteria.andIdEqualTo(departmentInfoDto.getId());
-//			criteria.andModifydatetimeIsNotNull();
-//			criteria.andModifydatetimeEqualTo(departmentInfoDto.getModifydatetime());
+			criteria.andModifydatetimeIsNotNull();
+			criteria.andModifydatetimeEqualTo(departmentInfoDto.getModifyDateTime());
 			List<Department> records = departmentMapper.selectByExample(example);
 			
 			if (records == null || records.size() == 0 || records.get(0) == null) {

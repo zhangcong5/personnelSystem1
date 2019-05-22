@@ -1,5 +1,7 @@
 package com.personnelSystem.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.personnelSystem.dto.admin.EmployeeInfoDto;
 import com.personnelSystem.dto.criteria.SearchEmployeeCriteria;
 import com.personnelSystem.facade.EmployeeFacade;
+import com.personnelSystem.service.EmployeeService;
 import com.personnelSystem.util.ApiRequest;
 import com.personnelSystem.util.ApiResponse;
 import com.personnelSystem.util.PaginatedList;
@@ -22,13 +25,24 @@ import com.personnelSystem.util.WebCommUtil;
 public class EmployeeController {
 	@Autowired
 	private EmployeeFacade employeeFacade;
+	@Autowired
+	private EmployeeService employeeService;
 	
 	@RequestMapping("/list")
 	@ResponseBody
-	public PaginatedList<EmployeeInfoDto> getList(SearchEmployeeCriteria request){
-		PaginatedList<EmployeeInfoDto> list = employeeFacade.listEmployeeDto(request);
-		return list;
-
+	public ApiResponse<List<EmployeeInfoDto>> getList(SearchEmployeeCriteria request){
+		ApiResponse<List<EmployeeInfoDto>> apiResponse = new ApiResponse<>();
+		try {
+			apiResponse = WebCommUtil.getSuccessApiResponse(employeeFacade.listEmployeeDto(request));
+			if (null != request && 0 != request.getPagesize()) {
+				apiResponse.setCount(employeeService.count(request));
+			}
+		} catch(Exception exp) {
+			apiResponse.setCode(SystemConstant.Code_GetEmployee_DbErr);
+			apiResponse.setMsg(String.format(SystemConstant.Msg_GetEmployee_DbErr, exp.getMessage()));
+		}
+		
+		return apiResponse;
 	}
 	
 	@RequestMapping("/detail")

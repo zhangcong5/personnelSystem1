@@ -266,7 +266,7 @@
 				and lower(IFNULL(department.departmentName,'')) LIKE CONCAT(CONCAT('%',
 				TRIM(lower(#{departmentName, jdbcType=VARCHAR}))), '%')
 			</if>
-			<if test="company != null and company != ''">
+			<if test="mobile != null and mobile != ''">
 				and lower(IFNULL(department.mobile,'')) LIKE CONCAT(CONCAT('%',
 				TRIM(lower(#{mobile, jdbcType=VARCHAR}))), '%')
 			</if>

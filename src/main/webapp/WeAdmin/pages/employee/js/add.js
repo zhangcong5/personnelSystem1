@@ -1,58 +1,4 @@
-/*debugger;*/
-/*				layui.use(['form', 'layer'], function() {
-				$ = layui.jquery;
-				var form = layui.form,
-					layer = layui.layer;
-
-				//自定义验证规则
-				form.verify({
-					title: function(value) {
-						if(value.length > 200) {
-							return '标题至多得255个字符啊';
-						}
-					},
-					content: function(value) {
-						if(value.length > 200) {
-							return '标题至多得255个字符啊';
-						}
-					},
-				});
-
-				//监听提交
-				form.on('submit(add)', function(data) {
-					$.post(
-							$.ajax({
-								url:"/announcement/insert.do",
-								type:"POST",
-								data:data.field,
-								contentType:"application/x-www-form-urlencoded;charset=utf-8",
-								success:function(data){
-									if(data.result=="success"){
-										layer.alert("增加成功", {
-											icon: 6
-										}, function() {
-											// 获得frame索引
-											var index = parent.layer.getFrameIndex(window.name);
-//											parent.location.reload();					
-											parent.$('input[name="title"]').val(f.title);
-											parent.$('input[name="content"]').val(f.content);
-											parent.$('input[name="state"]').val(f.state);
-											
-											parent.addMember();
-											//关闭当前frame
-											parent.layer.close(index);
-										});
-										return false;
-									}
-									if(data.result=="error"){
-										layer.msg("新增失败");
-									}
-									layer.closeAll('iframe')
-								}
-							})
-						);
-				});
-			});*/
+debugger;
 			layui.extend({
 				admin: '{/}../../static/js/admin'
 			});
@@ -62,7 +8,7 @@
 					$ = layui.jquery,
 					table = layui.table,
 					layer = layui.layer;
-
+				debugger;
 				//自定义验证规则
 				form.verify({
 					nikename: function(value) {
@@ -70,24 +16,59 @@
 							return '标题至多得255个字符啊';
 						}
 					},
+					pass: [/(.+){6,12}$/, '密码必须6到12位'],
+					repass: function(value) {
+						if($('#pass').val() != $('#repass').val()) {
+							return '两次密码不一致';
+						}
+					}
 				});
 
 				//监听提交
 				form.on('submit(add)', function(data) {
+			        var nickname = document.getElementById("nickname").value,
+			        	sex = document.getElementById("sex").value,
+			        	mgr = document.getElementById("mgr").value,
+			        	salary = document.getElementById("salary").value,
+			        	mobile = document.getElementById("mobile").value,
+			        	email = document.getElementById("email").value,
+/*			        	hiredate = document.getElementById("hiredate").value,
+			        	terminationDate = document.getElementById("terminationDate").value,*/
+			        	password = document.getElementById("repass").value;
+			        
+			        debugger;
+					if (nickname == "" || null == nickname){
+			            layer.msg("昵称不允许为空!", {time: 2000});
+			            return false;
+					}
+					if (salary == "" || null == salary){
+						layer.msg("薪水不允许为空!", {time: 2000});
+						return false;
+					}
+/*			        if (hiredate == "" || null == hiredate){
+			            layer.msg("入职时间不允许为空!", {time: 2000});
+			            return false;
+			        }*/
 					$.ajax({
-						url:"/announcement/insert.do",
+						url:"/employee/insert.do",
 						type:"POST",
 						data:data.field,
+						dataType:"json",
 						contentType:"application/x-www-form-urlencoded;charset=utf-8",
-						success:function(data){
-							if(data.result=="success"){
-								layer.msg("新增成功");
-							}
-							if(data.result=="error"){
-								layer.msg("新增失败");
-							}
-							layer.closeAll('iframe')
-						}
+			            success: function (relult) {
+			                if (!relult.result=="success") {
+			                    parent.layer.msg("添加失败!", {time: 2000});
+			                    return false;
+			                } else {
+			                    parent.layer.msg("添加成功!", {time: 1000});
+			                    // 获得frame索引
+			                    var index = parent.layer.getFrameIndex(window.name);
+			                    //关闭当前frame
+			                    parent.layer.close(index);
+			                    //刷新公告页面
+			                    parent.location.reload();
+			                }
+			            }
 					})
 				});
 			}); 

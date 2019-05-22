@@ -9,7 +9,8 @@ import com.personnelSystem.entity.Aattendance;
 import com.personnelSystem.entity.AattendanceExample;
 
 public interface AattendanceMapper {
-    long countByExample(AattendanceExample example);
+
+	long countByExample(AattendanceExample example);
 
     int deleteByExample(AattendanceExample example);
 

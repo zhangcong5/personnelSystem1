@@ -30,21 +30,21 @@
 
 		<div class="weadmin-body">
 			<div class="layui-row">
-				<form class="layui-form layui-col-md12 we-search">
-					部门搜索：
-					<div class="layui-inline">
-						<input type="text" id="departmentname" name="departmentname" placeholder="名称" autocomplete="off" class="layui-input"/>
-					</div>
-					<div class="layui-inline">
-						<input type="text" id="mobile" name="mobile" placeholder="联系方式" autocomplete="off" class="layui-input"/>
-					</div>
-					<button class="layui-btn" lay-submit="" lay-filter="sreach" id="select-btn">
-						<i class="layui-icon layui-icon-search"></i>
-					</button>
-				</form>
+				部门搜索：
+				<div class="layui-inline" >
+					<input type="text" name="departmentname" id="departmentname" placeholder="名称" autocomplete="off" class="layui-input"/>
+				</div>
+				<div class="layui-inline" >
+					<input type="text" name="mobile" id="mobile" placeholder="联系方式" autocomplete="off" class="layui-input"/>
+				</div>
+
+				<button class="layui-btn"  lay-filter="sreach" id="search">
+					<i class="layui-icon layui-icon-search"></i>搜索
+				</button>
 			</div>
+
 			<div class="weadmin-block">
-				<button class="layui-btn" onclick="WeAdminShow('添加部门','./add.html',600,400)">
+				<button class="layui-btn" onclick="WeAdminShow('添加部门','./add.html',300,400)">
 					<i class="layui-icon layui-icon-add-circle-fine"></i>添加
 				</button>
 			</div>

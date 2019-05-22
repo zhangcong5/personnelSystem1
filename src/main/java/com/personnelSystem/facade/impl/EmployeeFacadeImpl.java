@@ -19,8 +19,7 @@ public class EmployeeFacadeImpl implements EmployeeFacade{
 	@Autowired
 	private EmployeeService employeeService;
 	
-	public PaginatedList<EmployeeInfoDto> listEmployeeDto(SearchEmployeeCriteria Criteria) {
-		PaginatedList<EmployeeInfoDto>  resourceDtos = new PaginatedList<EmployeeInfoDto>();
+	public List<EmployeeInfoDto> listEmployeeDto(SearchEmployeeCriteria Criteria) {
 		List<EmployeeInfoDto> list = new ArrayList<EmployeeInfoDto>();
 
 		if (null != Criteria && 0 != Criteria.getPagesize()) {
@@ -36,9 +35,7 @@ public class EmployeeFacadeImpl implements EmployeeFacade{
 			list = employeeService.listEmployeeInfoDto(Criteria);
 		}
 		
-		resourceDtos.setPagination(Criteria);
-		resourceDtos.setRows(list);
-		return resourceDtos;
+		return list;
 	}
 
 	public EmployeeInfoDto getDetail(Integer Id) {

@@ -65,29 +65,45 @@
 
 				//自定义验证规则
 				form.verify({
-					nikename: function(value) {
+					departmentname: function(value) {
 						if(value.length > 255) {
-							return '标题至多得255个字符啊';
+							return '标题至多得255个字符';
 						}
 					},
 				});
 
 				//监听提交
 				form.on('submit(add)', function(data) {
+			        var departmentname = document.getElementById("departmentname").value,
+			        mobile = document.getElementById("mobile").value;
+					if (departmentname == "" || null == departmentname){
+			            layer.msg("部门名称不允许为空!", {time: 2000});
+			            return false;
+					}
+			        if (mobile == "" || null == mobile){
+			            layer.msg("联系方式不允许为空!", {time: 2000});
+			            return false;
+			        }
 					$.ajax({
-						url:"/announcement/insert.do",
+						url:"/department/insert.do",
 						type:"POST",
 						data:data.field,
 						contentType:"application/x-www-form-urlencoded;charset=utf-8",
-						success:function(data){
-							if(data.result=="success"){
-								layer.msg("新增成功");
-							}
-							if(data.result=="error"){
-								layer.msg("新增失败");
-							}
-							layer.closeAll('iframe')
-						}
+						async: false,
+			            success: function (relult) {
+			                if (!relult.result=="success") {
+			                    parent.layer.msg("添加失败!", {time: 2000});
+			                    return false;
+			                } else {
+			                    parent.layer.msg("添加成功!", {time: 1000});
+			                    // 获得frame索引
+			                    var index = parent.layer.getFrameIndex(window.name);
+			                    //关闭当前frame
+			                    parent.layer.close(index);
+			                    //刷新公告页面
+			                    parent.location.reload();
+			                }
+			            }
 					})
 				});
 			}); 

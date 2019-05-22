@@ -21,9 +21,8 @@ public class DepartmentFacadeImpl implements DepartmentFacade{
 	@Autowired 
 	private DepartmentService departmentService;
 	
-	public PaginatedList<DepartmentInfoDto> getDepartmentList(SearchDepartmentCriteria criteria) {
+	public List<DepartmentInfoDto> getDepartmentList(SearchDepartmentCriteria criteria) {
 		
-		PaginatedList<DepartmentInfoDto>  resourceDtos = new PaginatedList<DepartmentInfoDto>();
 		List<DepartmentInfoDto> list = new ArrayList<DepartmentInfoDto>();
 
 		if (null != criteria && 0 != criteria.getPagesize()) {
@@ -39,9 +38,7 @@ public class DepartmentFacadeImpl implements DepartmentFacade{
 			list = departmentService.getDepartmentList(criteria);
 		}
 		
-		resourceDtos.setPagination(criteria);
-		resourceDtos.setRows(list);
-		return resourceDtos;
+		return list;
 		
 		
 	}

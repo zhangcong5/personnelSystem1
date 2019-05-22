@@ -2,8 +2,6 @@ package com.personnelSystem.controller;
 
 import java.util.List;
 
-import com.personnelSystem.facade.EmployeeFacade;
-import com.personnelSystem.mapper.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +26,6 @@ public class AnnouncementController {
 	private AnnouncementFacade announcementFacade;
 	@Autowired 
 	private AnnouncementService announcementService;
-
 	
 	@RequestMapping("/list")
 	@ResponseBody
@@ -43,6 +40,7 @@ public class AnnouncementController {
 			apiResponse.setCode(SystemConstant.Code_GetAnnouncement_DbErr);
 			apiResponse.setMsg(String.format(SystemConstant.Msg_GetAnnouncement_DbErr, exp.getMessage()));
 		}
+		
 		return apiResponse;
 	}
 	

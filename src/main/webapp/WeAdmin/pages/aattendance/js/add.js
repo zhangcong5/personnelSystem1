@@ -74,20 +74,32 @@
 
 				//监听提交
 				form.on('submit(add)', function(data) {
+			        var state = document.getElementById("state").value,
+			        start = document.getElementById("start").value,
+			        end = document.getElementById("end").value,
+		            content = document.getElementById("content").value;
+				debugger;
 					$.ajax({
-						url:"/announcement/insert.do",
+						url:"/attendance/insert.do",
 						type:"POST",
 						data:data.field,
-						contentType:"application/x-www-form-urlencoded;charset=utf-8",
-						success:function(data){
-							if(data.result=="success"){
-								layer.msg("新增成功");
-							}
-							if(data.result=="error"){
-								layer.msg("新增失败");
-							}
-							layer.closeAll('iframe')
-						}
+			            dataType:"json",
+			            contentType:"application/x-www-form-urlencoded;charset=utf-8",
+						async: false,
+			            success: function (relult) {
+			                if (!relult.result=="success") {
+			                    parent.layer.msg("添加失败!", {time: 2000});
+			                    return false;
+			                } else {
+			                    parent.layer.msg("添加成功!", {time: 1000});
+			                    // 获得frame索引
+			                    var index = parent.layer.getFrameIndex(window.name);
+			                    //关闭当前frame
+			                    parent.layer.close(index);
+			                    //刷新公告页面
+			                    parent.location.reload();
+			                }
+			            }
 					})
 				});
 				

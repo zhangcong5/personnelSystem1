@@ -66,10 +66,10 @@
         </table>
         <table tableName="announcement" domainObjectName="Announcement" alias="announcement">
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
-        </table>
-        <table tableName="attendance_employee" domainObjectName="Aattendance" alias="aattendance">
+        </table> 
+         <table tableName="attendance_employee" domainObjectName="Aattendance" alias="aattendance">
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
-        </table> -->
-        
+        </table>
+         -->
     </context>
 </generatorConfiguration>
