@@ -1,6 +1,8 @@
 package com.personnelSystem.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,10 +34,15 @@ public class AattendanceServiceImpl implements AattendanceService{
 	public ResultDataDto insert(AattendanceDto aattendanceDto) throws Exception {
 		ResultDataDto resultData = new ResultDataDto();
 		Aattendance aattendance = null;
+		Date startingtime = null;
+		Date endtime = null;
 		try {
 			aattendance = transDtoRecordToAattendance(aattendanceDto);
+			startingtime = aattendanceDto.getStartingtime();
+			endtime = aattendanceDto.getEndtime();
+			int days = differentDaysByMillisecond(startingtime, endtime);
+			aattendance.setNumber(days);
 			aattendanceMapper.insertSelective(aattendance);
-			
 			resultData.setResultCode(SystemConstant.Code_OK);
 			resultData.setResultMessage(String.format(SystemConstant.Msg_Aattendance_Insert_OK, aattendance.getId(), aattendance.getContent()));			
 			
@@ -46,6 +53,12 @@ public class AattendanceServiceImpl implements AattendanceService{
 			log.error(rtnMsg);
 		}
 		return resultData;
+	}
+
+	public static int differentDaysByMillisecond(Date date1,Date date2)
+	{
+		int days = (int) ((date2.getTime() - date1.getTime()) / (1000*3600*24));
+		return days;
 	}
 
 	public ResultDataDto update(AattendanceDto aattendanceDto) throws Exception {
@@ -115,7 +128,7 @@ public class AattendanceServiceImpl implements AattendanceService{
 	/**
 	 * 数据转化
 	 * Aattendance =====》 AattendanceDto
-	 * @param Aattendance
+	 * @param aattendance
 	 * @return
 	 */
 	private AattendanceDto transAattendanceRecordToDto(Aattendance aattendance) {

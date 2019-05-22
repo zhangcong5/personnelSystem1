@@ -22,7 +22,7 @@
 	                  	<span class="we-red">*</span>类型
 	              	</label>
 					<div class="layui-input-inline">
-						<select id="state" name="state" class="valid">
+						<select id="type" name="type" class="valid" lay-verify="required" lay-search="">
 							<option value=0>外勤</option>
 							<option value=1>请假</option>
 							<option value=2>加班</option>
@@ -35,26 +35,27 @@
 		                <span class="we-red">*</span>开始时间
 		            </label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input" id="start" name="start" autocomplete="off"/>
+						<input type="text" class="layui-input" id="startingtime" name="startingtime" autocomplete="off"/>
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label for="L_email" class="layui-form-label">
-					<span class="we-red">*</span>结束时间</label>
+					<span class="we-red">*</span>结束时间
+					</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input"  id="end" name="end" autocomplete="off" />
+						<input type="text" class="layui-input"  id="endtime" name="endtime" autocomplete="off" />
 					</div>
 				</div>
 				
 
-				<div class="layui-form-item">
-				  <div class="layui-inline">
-				    <label class="layui-form-label">日期时间选择器</label>
-				    <div class="layui-input-inline">
-				      <input type="text" class="layui-input" id="test" placeholder="yyyy-MM-dd HH:mm:ss">
-				    </div>
-				  </div>
-				</div>
+				<!--<div class="layui-form-item">-->
+				  <!--<div class="layui-inline">-->
+				    <!--<label class="layui-form-label">日期时间选择器</label>-->
+				    <!--<div class="layui-input-inline">-->
+				      <!--<input type="text" class="layui-input" id="test" placeholder="yyyy-MM-dd HH:mm:ss">-->
+				    <!--</div>-->
+				  <!--</div>-->
+				<!--</div>-->
 				
 				<div class="layui-form-item layui-form-text">
 				<label for="desc" class="layui-form-label"><span class="we-red">*</span>内容</label>
@@ -73,14 +74,19 @@
 		<script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/add.js" type="text/javascript"></script>
 		<script>
- 		layui.use('laydate', function(){
-			var laydate = layui.laydate;
-			  
-			laydate.render({
-				  elem: '#start',
-				  ,type: 'datetime'
-			});
-		)}
+            layui.use(['laydate','jquery','form'],function(){
+                var laydate = layui.laydate
+            		,$ = layui.jquery;
+                $(".layui-input").each(function(){
+                    laydate.render({
+                        elem: this,
+                        type: 'datetime',
+                        trigger : 'click'
+                    });
+                })
+                var form = layui.form;
+                form.render();
+            });
 		</script>
 	</body>
 

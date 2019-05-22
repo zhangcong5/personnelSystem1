@@ -1,6 +1,9 @@
 	var mytable = null;
 	var content = '';
-	layui.use(['laydate', 'layer', 'table', 'carousel', 'upload', 'element'], function(){
+    // layui.extend({
+    //     admin: '{/}../../static/js/admin'
+    // });
+	layui.use(['laydate', 'layer', 'table', 'carousel', 'upload', 'element','admin'], function(){
         var table = layui.table //表格
 		,$ = layui.jquery
 

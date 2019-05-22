@@ -53,9 +53,6 @@
 						);
 				});
 			});*/
-			layui.extend({
-				admin: '{/}../../static/js/admin'
-			});
 			layui.use(['form', 'admin', 'jquery', 'table', 'layer'], function() {
 				var form = layui.form,
 					admin = layui.admin,
@@ -64,25 +61,35 @@
 					layer = layui.layer;
 
 				//自定义验证规则
-				form.verify({
-					nikename: function(value) {
-						if(value.length > 255) {
-							return '标题至多得255个字符啊';
-						}
-					},
-				});
+				// form.verify({
+				// 	nikename: function(value) {
+				// 		if(value.length > 255) {
+				// 			return '标题至多得255个字符啊';
+				// 		}
+				// 	},
+				// });
 
 				//监听提交
 				form.on('submit(add)', function(data) {
-			        var state = document.getElementById("state").value,
-			        start = document.getElementById("start").value,
-			        end = document.getElementById("end").value,
-		            content = document.getElementById("content").value;
-				debugger;
+			        var type = document.getElementById("type").value,
+                        startingtime = document.getElementById("startingtime").value,
+                        endtime = document.getElementById("endtime").value,
+                        content = document.getElementById("content").value;
+                    console.log(type)
+                    console.log(startingtime)
+                    console.log(endtime)
+                    console.log(content)
+                    data = {
+			        	type:type,
+                        startingtime:startingtime,
+                        endtime:endtime,
+                        content:content,
+					}
+
 					$.ajax({
 						url:"/attendance/insert.do",
 						type:"POST",
-						data:data.field,
+						data:data,
 			            dataType:"json",
 			            contentType:"application/x-www-form-urlencoded;charset=utf-8",
 						async: false,
