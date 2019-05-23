@@ -1,4 +1,4 @@
-debugger;
+
 			layui.extend({
 				admin: '{/}../../static/js/admin'
 			});
@@ -28,24 +28,28 @@ debugger;
 				form.on('submit(add)', function(data) {
 			        var nickname = document.getElementById("nickname").value,
 			        	sex = document.getElementById("sex").value,
-			        	mgr = document.getElementById("mgr").value,
+			        	mgr = document.getElementById("superior").value,
+                        department = document.getElementById("department").value,
 			        	salary = document.getElementById("salary").value,
 			        	mobile = document.getElementById("mobile").value,
 			        	email = document.getElementById("email").value,
-/*			        	hiredate = document.getElementById("hiredate").value,
-			        	terminationDate = document.getElementById("terminationDate").value,*/
-			        	password = document.getElementById("repass").value;
+		        		hiredate = document.getElementById("hiredate").value,
+			        	terminationDate = document.getElementById("terminationDate").value,
+			        	password = document.getElementById("pass").value;
+			        console.log(department)
                     data = {
                         nickname:nickname,
                         sex:sex,
                         mgr:mgr,
+                        hiredate:hiredate,
+                        terminationDate:terminationDate,
+                        departmentId:department,
                         salary:salary,
                         mobile:mobile,
                         email:email,
                         password:password,
 
 					}
-			        debugger;
 					if (nickname == "" || null == nickname){
 			            layer.msg("昵称不允许为空!", {time: 2000});
 			            return false;
@@ -58,26 +62,48 @@ debugger;
 			            layer.msg("入职时间不允许为空!", {time: 2000});
 			            return false;
 			        }*/
-					$.ajax({
-						url:"/employee/insert.do",
-						type:"POST",
-						data:data,
-						dataType:"json",
-						contentType:"application/x-www-form-urlencoded;charset=utf-8",
-			            success: function (relult) {
-			                if (!relult.result=="success") {
-			                    parent.layer.msg("添加失败!", {time: 2000});
-			                    return false;
-			                } else {
-			                    parent.layer.msg("添加成功!", {time: 1000});
-			                    // 获得frame索引
-			                    var index = parent.layer.getFrameIndex(window.name);
-			                    //关闭当前frame
-			                    parent.layer.close(index);
-			                    //刷新公告页面
-			                    parent.location.reload();
-			                }
-			            }
-					})
+					// $.ajax({
+					// 	url:"/employee/insert.do",
+					// 	type:"POST",
+					// 	data:data,
+					// 	dataType:"json",
+					// 	contentType:"application/x-www-form-urlencoded;charset=utf-8",
+			         //    success: function (relult) {
+                     //        if (!relult.result=="success") {
+                     //            parent.layer.msg("添加失败!", {time: 2000});
+                     //            return false;
+                     //        } else {
+                     //            parent.layer.msg("添加成功!", {time: 1000});
+                     //            // 获得frame索引
+                     //            var index = parent.layer.getFrameIndex(window.name);
+                     //            //关闭当前frame
+                     //            parent.layer.close(index);
+                     //            //刷新公告页面
+                     //            parent.location.reload();
+                     //        }
+			         //    }
+					// })
+                    $.ajax({
+                        url:"/employee/insert.do",
+                        type:"POST",
+                        data:data,
+                        dataType:"json",
+                        contentType:"application/x-www-form-urlencoded;charset=utf-8",
+                        async: false,
+                        success: function (relult) {
+                            if (!relult.result=="success") {
+                                parent.layer.msg("添加失败!", {time: 2000});
+                                return false;
+                            } else {
+                                parent.layer.msg("添加成功!", {time: 1000});
+                                // 获得frame索引
+                                var index = parent.layer.getFrameIndex(window.name);
+                                //关闭当前frame
+                                parent.layer.close(index);
+                                //刷新公告页面
+                                parent.location.reload();
+                            }
+                        }
+                    })
 				});
 			}); 

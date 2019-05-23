@@ -87,22 +87,42 @@
 					</div>
 				</div>
 
-<!-- 				<div class="layui-form-item">
+ 				<div class="layui-form-item">
 					<label for="L_email" class="layui-form-label">
 		                <span class="we-red">*</span>入职时间
 		            </label>
 					<div class="layui-input-inline">
-						<input class="layui-input" name="start" id="start" autocomplete="off"/>
+						<input type="text" class="layui-input myInput" name="hiredate" id="hiredate" autocomplete="off"/>
 					</div>
 				</div>
+
+				<!--<div class="layui-form-item">-->
+					<!--<label for="L_email" class="layui-form-label">-->
+						<!--<span class="we-red">*</span>开始时间-->
+					<!--</label>-->
+					<!--<div class="layui-input-inline">-->
+						<!--<input type="text" class="layui-input" id="startingtime" name="startingtime" autocomplete="off"/>-->
+					<!--</div>-->
+				<!--</div>-->
+
 				<div class="layui-form-item">
 					<label for="L_email" class="layui-form-label">
-					离职时间</label>
+						<span class="we-red">*</span>离职时间
+					</label>
 					<div class="layui-input-inline">
-						<input class="layui-input" name="end" id="end" autocomplete="off" />
+						<input type="text" class="layui-input myInput"  id="terminationDate" name="terminationDate" autocomplete="off" />
 					</div>
-				</div> -->
-				
+				</div>
+
+				<!--<div class="layui-form-item">-->
+					<!--<label for="L_email" class="layui-form-label">-->
+						<!--<span class="we-red">*</span>结束时间-->
+					<!--</label>-->
+					<!--<div class="layui-input-inline">-->
+						<!--<input type="text" class="layui-input"  id="endtime" name="endtime" autocomplete="off" />-->
+					<!--</div>-->
+				<!--</div>-->
+
 				<div class="layui-form-item">
 					<label for="pass" class="layui-form-label">
 	                	  <span class="we-red">*</span>密码
@@ -148,10 +168,11 @@
 <!-- 		<script src="../../static/js/eleDel.js" type="text/javascript" charset="utf-8"></script> -->		
 		<script src="js/add.js" type="text/javascript"></script>
 		<script>
-            layui.use(['form','jquery'], function(){
+            layui.use(['laydate','form','jquery'], function(){
 
                 //----------模块----------
                 var form = layui.form
+					,laydate = layui.laydate
 					,$=layui.jquery;
 
                 //动态添加下拉框     同时可以设置默认值
@@ -168,7 +189,6 @@
                             //设置value（这个值就可以是在更新的时候后台传递到前台的值）为2的值为默认选中
                             $('#superior').val(1);
                         })
-
                         form.render(); //更新全部表单内容
                         //form.render('select'); //刷新表单select选择框渲染
                     }
@@ -192,7 +212,18 @@
                         //form.render('select'); //刷新表单select选择框渲染
                     }
                 });
+
+                $(".myInput").each(function(){
+                    laydate.render({
+                        elem: this,
+                        type: 'datetime',
+                        trigger : 'click'
+                    });
+                })
+                var form = layui.form;
+                form.render();
             });
+
 		</script>
 	</body>
 

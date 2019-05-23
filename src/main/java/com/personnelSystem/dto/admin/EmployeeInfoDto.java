@@ -89,7 +89,7 @@ public class EmployeeInfoDto {
 		private String departmentName;
 		
 		/**
-		 *标识 
+		 *标识
 		 */
 	    private Boolean version;
 		/**

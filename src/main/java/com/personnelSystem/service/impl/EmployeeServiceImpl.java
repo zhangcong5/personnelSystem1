@@ -77,6 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		try {
 			employeeDto.setCreatedById(1);
 			employeeDto.setModifyById(1);
+			employeeDto.setIsadmin(0);
 			employee = transDtoRecordToEmployee(employeeDto);
 			employeeMapper.insertSelective(employee);
 			
@@ -328,6 +329,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 			employee.setModifydatetime(employeeDto.getModifyDateTime());
 			employee.setVersion(employeeDto.getVersion());
 			employee.setIsadmin(employeeDto.getIsadmin());
+			employee.setPassword(employeeDto.getPassword());
 		}
 		return employee;
 	}
